@@ -1,0 +1,38 @@
+@media screen and (max-width: 768px) {
+  * {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  body {
+    padding: 2rem;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    touch-action: manipulation; /* Simulates touchscreen interactions */
+    cursor: pointer; /* Makes it feel like a touchscreen */
+  }
+
+  .categories button {
+    border: 1px black solid;
+    border-radius: 100px;
+    background-color: transparent;
+    font-size: 1rem;
+    padding: 0.3rem 1rem;
+  }
+
+  .carousel {
+    max-height: 200px;
+    /* height: 100px; */
+    /* background-color: red; */
+    margin: 1.1rem 0;
+    border-radius: 1rem;
+  }
+
+  .carousel-item {
+    max-height: 200px;
+    border-radius: 1rem;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    border-radius: 1rem;
+  }
+}
