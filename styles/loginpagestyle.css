@@ -35,8 +35,8 @@
     border-radius: .5rem;
   }
 
-  .btn:active{
-    background-color: #091540;
+  button:active{
+    background-color: #061030;
     color: white;
   }
 
