@@ -1,4 +1,11 @@
-@media screen and (max-width: 768px) {
+.head-parent {
+  max-width: 768px;
+  /* background-color: red; */
+  justify-items: center;
+  margin: auto;
+}
+
+/* @media screen and (max-width: 768px) { */
   * {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   }
@@ -10,26 +17,35 @@
     cursor: pointer; /* Makes it feel like a touchscreen */
   }
 
+  .parent{
+    justify-content: start;
+    /* background-color: blue; */
+  }
+
   .categories button {
     border: 1px black solid;
     border-radius: 100px;
     background-color: transparent;
     font-size: 1rem;
     padding: 0.3rem 1rem;
+    justify-items: start;
+    justify-content: start;
   }
 
   .carousel {
-    max-height: 200px;
+    /* max-height: 200px; */
+    /* max-width: 364px; */
     /* height: 100px; */
     /* background-color: red; */
     margin: 1.1rem 0;
     border-radius: 1rem;
+    /* position: relative; */
   }
 
   .carousel-item {
-    max-height: 200px;
-    max-width: 100%;
-    height: 200px;
+    /* max-height: 200px; */
+    /* max-width: 364px; */
+    /* height: 200px; */
     border-radius: 1rem;
     /* background-color: red; */
 }
@@ -40,4 +56,4 @@
     width: 100%;
     height: 100%;
   }
-}
+/* } */

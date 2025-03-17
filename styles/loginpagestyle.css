@@ -1,4 +1,12 @@
-@media screen and (max-width: 768px) {
+.head-parent {
+  max-width: 1000px;
+  /* background-color: red; */
+  /* justify-content: center; */
+  justify-items: center;
+  margin: auto;
+}
+
+/* @media screen and (max-width: 768px) { */
   * {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   }
@@ -6,8 +14,10 @@
   body {
     padding: 2rem;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    touch-action: manipulation; /* Simulates touchscreen interactions */
-    cursor: pointer; /* Makes it feel like a touchscreen */
+    touch-action: manipulation;
+    /* Simulates touchscreen interactions */
+    cursor: pointer;
+    /* Makes it feel like a touchscreen */
   }
 
   .header {
@@ -53,4 +63,4 @@
     text-decoration: none;
     font-weight: bold;
   }
-}
+/* } */
