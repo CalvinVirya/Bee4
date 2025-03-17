@@ -1,59 +1,64 @@
 .head-parent {
   max-width: 768px;
+  /* height: 100vh; */
   /* background-color: red; */
-  justify-items: center;
+  /* justify-items: center; */
   margin: auto;
 }
 
 /* @media screen and (max-width: 768px) { */
-  * {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  }
-
-  body {
-    padding: 2rem;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    touch-action: manipulation; /* Simulates touchscreen interactions */
-    cursor: pointer; /* Makes it feel like a touchscreen */
-  }
-
-  .parent{
-    justify-content: start;
-    /* background-color: blue; */
-  }
-
-  .categories button {
-    border: 1px black solid;
-    border-radius: 100px;
-    background-color: transparent;
-    font-size: 1rem;
-    padding: 0.3rem 1rem;
-    justify-items: start;
-    justify-content: start;
-  }
-
-  .carousel {
-    /* max-height: 200px; */
-    /* max-width: 364px; */
-    /* height: 100px; */
-    /* background-color: red; */
-    margin: 1.1rem 0;
-    border-radius: 1rem;
-    /* position: relative; */
-  }
-
-  .carousel-item {
-    /* max-height: 200px; */
-    /* max-width: 364px; */
-    /* height: 200px; */
-    border-radius: 1rem;
-    /* background-color: red; */
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.d-block {
-    object-fit: cover;
-    border-radius: 1rem;
-    width: 100%;
-    height: 100%;
-  }
+body {
+  padding: 2rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  touch-action: manipulation; /* Simulates touchscreen interactions */
+  cursor: pointer; /* Makes it feel like a touchscreen */
+}
+
+.parent {
+  justify-content: start;
+  /* background-color: blue; */
+}
+
+.categories button {
+  border: 1px black solid;
+  border-radius: 100px;
+  background-color: transparent;
+  font-size: 1rem;
+  padding: 0.3rem 1rem;
+  justify-items: start;
+  justify-content: start;
+}
+
+.carousel {
+  margin: 1.1rem 0;
+}
+
+.c-item {
+  height: 100%;
+  width: 100%;
+}
+
+.c-img {
+  border-radius: 1rem;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5);
+}
+
+.carousel-caption {
+  display: flex;
+  align-items: center;
+}
+
+.caption {
+  font-size: 1em;
+  margin: auto;
+}
+
+/* tambahin media query buat captionnya biar jadi kecil kalo kecil, jadi gede kalo gede */
+
 /* } */
