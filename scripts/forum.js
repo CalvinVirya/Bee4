@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (error) {
       console.log(error);
     } else {
-      alert("forum posted");
+      // alert("forum posted");
     }
   }
   document.getElementById("submitBtn").addEventListener("click", insertForum);
