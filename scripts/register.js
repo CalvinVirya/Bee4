@@ -13,18 +13,26 @@ document.addEventListener("DOMContentLoaded", () => {
       email: email,
       password: password,
     });
+
+    if (error) {
+      alert("Email already exsists");
+      console.error("Login Error:", error.message);
+    } else {
+      sessionStorage.setItem("emailActive", email);
+      window.location.href = "pages/inputdetail.html";
+    }
   }
 
   async function userDetails() {
     var email = document.getElementById("Email").value;
     var password = document.getElementById("Password").value;
-    var username = document.getElementById("Username").value;
+    // var username = document.getElementById("Username").value;
 
     const { data, error } = await supabase
       .from("users")
-      .insert({ email: email, password: password, username: username });
+      .insert({ email: email, password: password, username: "username" });
   }
 
-  document.getElementById("registerBtn").addEventListener("click", userAuth);
-  document.getElementById("registerBtn").addEventListener("click", userDetails);
+  // document.getElementById("registerBtn").addEventListener("click", userAuth);
+  // document.getElementById("registerBtn").addEventListener("click", userDetails);
 });

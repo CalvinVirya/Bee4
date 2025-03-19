@@ -1,69 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Register</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
 
-    <link rel="stylesheet" href="../styles/loginpagestyle.css" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bee4 | Register</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="../scripts/register.js"></script>
-  </head>
+  <link rel="stylesheet" href="../styles/loginpagestyle.css" />
+  <link rel="stylesheet" href="../styles/configuration.css">
 
-  <body>
-    <div class="head-parent">
-      <div class="parent mb-5 mt-5">
-        <img src="../assets/logo.png" alt="" />
-        <p class="header mb-5">Create your account</p>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="../scripts/register.js"></script>
+</head>
 
-        <div class="form-floating mb-4">
-          <input
-            type="text"
-            class="form-control"
-            id="Username"
-            placeholder="username"
-          />
-          <label for="floatingInput">Username</label>
-        </div>
-        <div class="form-floating mb-4">
-          <input
-            type="email"
-            class="form-control"
-            id="Email"
-            placeholder="name@example.com"
-          />
-          <label for="floatingInput">Email address</label>
-        </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="Password"
-            placeholder="Password"
-          />
-          <label for="floatingPassword">Password</label>
-        </div>
+<body>
 
-        <a href="#">
-          <button type="submit" class="mt-5" id="registerBtn">Register</button>
-        </a>
+  <!-- head parent -->
+  <div class="head-parent mt-5 p-4">
 
-        <div class="account">
-          <p>Already have account? <a href="../index.html">Log In</a></p>
-        </div>
+    <!-- parent container -->
+    <div class="parent text-center w-100">
+
+      <!-- logo sama tulisan -->
+      <img src="../assets/logo.png" alt="logo" />
+      <p class="header mb-5 fs-1 fw-bold">Create your account</p>
+
+      <!-- email input -->
+      <div class="form-floating mb-4">
+        <input type="email" class="form-control" id="Email" placeholder="name@example.com" />
+        <label for="floatingInput">Email address</label>
+      </div>
+
+      <!-- password input -->
+      <div class="form-floating mb-4">
+        <input type="password" class="form-control" id="Password" placeholder="Password" />
+        <label for="floatingPassword">Password</label>
+      </div>
+
+      <!-- confirm password input -->
+      <div class="form-floating">
+        <input type="password" class="form-control" id="Password" placeholder="Password" />
+        <label for="floatingPassword">Confirm Password</label>
+      </div>
+
+      <!-- button register -->
+      <a href="../pages/inputdetail.html">
+        <button type="submit" class="mt-5 p-3 w-100 fw-bold rounded text-light" id="registerBtn">Register</button>
+      </a>
+
+      <!-- direct ke login page -->
+      <div class="account mt-5">
+        <p>Already have account? <a href="../index.html">Log In</a></p>
       </div>
     </div>
-  </body>
+
+  </div>
+
+
+</body>
+
 </html>
