@@ -4,4 +4,10 @@
 
 body {
     touch-action: manipulation;
+    overflow-x: hidden;
+}
+
+.head-parent {
+    max-width: 768px;
+    margin: auto;
 }
