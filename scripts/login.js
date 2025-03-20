@@ -7,12 +7,12 @@ document.addEventListener("DOMContentLoaded", () => {
   async function signIn() {
     var email = document.getElementById("Email").value;
     var password = document.getElementById("Password").value;
-    
+
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
-    
+
     if (error) {
       alert("Wrong email or password");
       console.error("Login Error:", error.message);
@@ -24,5 +24,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   document.getElementById("loginBtn").addEventListener("click", signIn);
-
 });
