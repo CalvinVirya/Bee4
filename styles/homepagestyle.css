@@ -1,7 +1,7 @@
 .categories button {
   border: 1px solid #091540;
   border-radius: 100px;
-  background-color: transparent;
+  background-color: white;
   padding: .3rem 1rem;
   color: #091540;
 }
@@ -11,6 +11,16 @@
   border-radius: 100px;
   background-color: transparent;
   padding: .1rem 1rem;
+}
+
+.btn-forum{
+  background-color: #091540;
+  color: white;
+}
+
+.categories .btn-category-active{
+  background-color: #091540;
+  color: white;
 }
 
 .carousel-inner {

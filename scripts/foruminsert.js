@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const postDiv = document.createElement("div");
       postDiv.innerHTML = `
       <div class="card-parent w-100 mb-5">
-        <div class="card mb-3">
+        <div class="card mb-3 border-2">
           <div class="card-body">
             <h5 class="card-title">${post.title}</h5>
             <p class="card-text">${post.content}
@@ -33,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
           <h6 class="card-subtitle text-body-secondary">${post.username}'s Forum</h6>
           <div class="info-parent">
             <button class="me-2 card-subtitle text-body-secondary">Calculus</button>
-            <button class="card-subtitle text-body-secondary">Computer Science</button>
           </div>
         </div>
       </div>
@@ -46,6 +45,18 @@ document.addEventListener("DOMContentLoaded", () => {
     var title = document.getElementById("Title").value;
     var content = document.getElementById("Content").value;
     var username = sessionStorage.getItem("usernameActive");
+    var inputTitle = document.getElementById("Title");
+    var inputContent = document.getElementById("Content");
+
+    if (!title.trim()){
+      inputTitle.classList.toggle('is-invalid');
+      return;
+    }
+
+    if (!content.trim()){
+      inputContent.classList.toggle('is-invalid');
+      return;
+    }
 
     const { data, error } = await supabase.from("forum").insert({
       title: title,
@@ -57,8 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alert(error.message);
       console.log(error);
     } else {
-      alert("forum posted");
-      showForum();
+      window.location.href = "../pages/homepage.html";
     }
   }
 
@@ -69,7 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .from("users")
       .select("username, email")
       .eq("email", email);
-    // .where("email LIKE email");
 
     if (error) {
       alert("Failed to load posts.");
@@ -78,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
       sessionStorage.setItem("emailActive", data[0].email);
       sessionStorage.setItem("usernameActive", data[0].username);
     } else {
-      alert("Email not registered");
+      window.location.href = "index.html";
     }
   }
 

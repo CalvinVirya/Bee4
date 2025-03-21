@@ -32,18 +32,27 @@
       <div class="form-floating mb-4">
         <input type="email" class="form-control" id="Email" placeholder="name@example.com" />
         <label for="floatingInput">Email address</label>
+        <div class="invalid-feedback text-start">
+          Must be @binus.ac.id domain.
+        </div>
       </div>
 
       <!-- password input -->
       <div class="form-floating mb-4">
         <input type="password" class="form-control" id="Password" placeholder="Password" />
         <label for="floatingPassword">Password</label>
+        <div class="invalid-feedback text-start">
+          Password cannot contain space
+        </div>
       </div>
 
       <!-- confirm password input -->
       <div class="form-floating">
         <input type="password" class="form-control" id="Confirm-Password" placeholder="Password" />
         <label for="floatingPassword">Confirm Password</label>
+        <div class="invalid-feedback text-start">
+          Password don't match
+        </div>
       </div>
 
       <!-- button register -->

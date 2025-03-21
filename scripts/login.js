@@ -7,24 +7,22 @@ document.addEventListener("DOMContentLoaded", () => {
   async function signIn() {
     var email = document.getElementById("Email").value;
     var password = document.getElementById("Password").value;
+    var inputEmail = document.getElementById("Email");
+    var inputPassword = document.getElementById("Password");
+    var loginAlert = document.getElementById("Alert");
 
-    // -----------------------------------------------------------------------------------------------
-   
     // Validasi email harus @binus.ac.id
     const emailRegex = /^[a-zA-Z0-9._%+-]+@binus\.ac\.id$/;
     if (!emailRegex.test(email)) {
-      alert("Email harus menggunakan domain @binus.ac.id");
+      inputEmail.classList.toggle('is-invalid');
       return;
     }
 
     // Cek apakah password mengandung spasi
     if (password.includes(" ")) {
-      alert("Password tidak boleh mengandung spasi");
+      inputPassword.classList.toggle('is-invalid');
       return;
-    }
-
-     // -----------------------------------------------------------------------------------------------
-   
+    }   
 
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
@@ -32,25 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (error) {
-      alert("Wrong email or password");
+      loginAlert.classList.toggle('display-none');
       console.error("Login Error:", error.message);
     } else {
-      // alert("Login Successful!");
       sessionStorage.setItem("emailActive", email);
       window.location.href = "pages/homepage.html";
     }
   }
 
-  // -----------------------------------------------------------------------------------------------
-   
-
-  // Cegah spacebar di input password secara langsung
-  document.getElementById("Password").addEventListener("input", (e) => {
-    e.target.value = e.target.value.replace(/\s/g, "");
-  });
-
-
-  // -----------------------------------------------------------------------------------------------
-   
   document.getElementById("loginBtn").addEventListener("click", signIn);
 });

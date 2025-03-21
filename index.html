@@ -30,16 +30,27 @@
       <img src="assets/logo.png" alt="logo" />
       <p class="header fs-1 fw-bold mb-5">Login to your account</p>
 
+      <!-- alert salah email or password -->
+      <div class="alert alert-danger text-start display-none" role="alert" id="Alert">
+        Wrong email or password.
+      </div>
+
       <!-- email input -->
       <div class="form-floating mb-4">
         <input type="email" class="form-control" id="Email" placeholder="name@binus.ac.id" />
         <label for="floatingInput">Email address</label>
+        <div class="invalid-feedback text-start">
+          Must be @binus.ac.id domain.
+        </div>
       </div>
 
       <!-- password input -->
       <div class="form-floating">
         <input type="password" class="form-control" id="Password" placeholder="Password" />
         <label for="floatingPassword">Password</label>
+        <div class="invalid-feedback text-start">
+          Password cannot contain space
+        </div>
       </div>
 
       <!-- button login -->

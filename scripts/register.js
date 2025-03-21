@@ -1,4 +1,3 @@
-// Ensure Supabase is available
 document.addEventListener("DOMContentLoaded", () => {
   const supabaseUrl = "https://eyivkatlviuwitwjklkq.supabase.co";
   const supabaseKey =
@@ -8,24 +7,30 @@ document.addEventListener("DOMContentLoaded", () => {
   async function userAuth() {
     var email = document.getElementById("Email").value;
     var password = document.getElementById("Password").value;
+    var confirmPassword = document.getElementById("Confirm-Password").value;
+    var inputEmail = document.getElementById("Email");
+    var inputPassword = document.getElementById("Password");
+    var inputConfirmPassword = document.getElementById("Confirm-Password");
 
-    // -----------------------------------------------------------------------------------------------
-   
     // Validasi email harus domain @binus.ac.id
     const emailRegex = /^[a-zA-Z0-9._%+-]+@binus\.ac\.id$/;
     if (!emailRegex.test(email)) {
-      alert("Email harus menggunakan domain @binus.ac.id");
+      inputEmail.classList.toggle('is-invalid');
       return;
     }
 
     // Cek apakah password mengandung spasi
     if (password.includes(" ")) {
-      alert("Password tidak boleh mengandung spasi");
+      inputPassword.classList.toggle('is-invalid');
       return;
     }
 
-    // -----------------------------------------------------------------------------------------------
-   
+    // Cek apakah kedua password sama
+    if (password !== confirmPassword) {
+      inputConfirmPassword.classList.toggle('is-invalid');
+      return;
+    }
+
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
@@ -42,16 +47,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // -----------------------------------------------------------------------------------------------
-   
-  // Cegah spacebar langsung di input password
-  document.getElementById("Password").addEventListener("input", (e) => {
-    e.target.value = e.target.value.replace(/\s/g, "");
-  });
-
-  // -----------------------------------------------------------------------------------------------
-   
-
   document.getElementById("registerBtn").addEventListener("click", userAuth);
-  // document.getElementById("registerBtn").addEventListener("click", userDetails);
 });
