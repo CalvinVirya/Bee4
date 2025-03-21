@@ -9,6 +9,23 @@ document.addEventListener("DOMContentLoaded", () => {
     var email = document.getElementById("Email").value;
     var password = document.getElementById("Password").value;
 
+    // -----------------------------------------------------------------------------------------------
+   
+    // Validasi email harus domain @binus.ac.id
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@binus\.ac\.id$/;
+    if (!emailRegex.test(email)) {
+      alert("Email harus menggunakan domain @binus.ac.id");
+      return;
+    }
+
+    // Cek apakah password mengandung spasi
+    if (password.includes(" ")) {
+      alert("Password tidak boleh mengandung spasi");
+      return;
+    }
+
+    // -----------------------------------------------------------------------------------------------
+   
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
@@ -24,6 +41,16 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "../pages/inputdetail.html";
     }
   }
+
+  // -----------------------------------------------------------------------------------------------
+   
+  // Cegah spacebar langsung di input password
+  document.getElementById("Password").addEventListener("input", (e) => {
+    e.target.value = e.target.value.replace(/\s/g, "");
+  });
+
+  // -----------------------------------------------------------------------------------------------
+   
 
   document.getElementById("registerBtn").addEventListener("click", userAuth);
   // document.getElementById("registerBtn").addEventListener("click", userDetails);
