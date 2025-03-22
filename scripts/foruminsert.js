@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   async function showForum() {
     const { data, error } = await supabase
       .from("forum")
-      .select("title, content, user_id(username), course");
+      .select("title, content, users(username),course")
+      .order("created_at", { ascending: false });
 
     if (error) {
       console.error("Error fetching posts:", error.message);
@@ -30,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
         <div class="button-card d-flex justify-content-between align-items-center mt-2">
-          <h6 class="card-subtitle text-body-secondary">${post.user_id(username)}'s Forum</h6>
+          <h6 class="card-subtitle text-body-secondary">${post.users.username}'s Forum</h6>
           <div class="info-parent">
             <button class="me-2 card-subtitle text-body-secondary">${post.course}</button>
           </div>
@@ -41,70 +42,74 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  async function insert2() {
+  async function insert2(event) {
     var title = document.getElementById("Title").value;
     var content = document.getElementById("Content").value;
     var course = document.getElementById("Course").value;
-    // var username = sessionStorage.getItem("usernameActive");
+    var fileInput = document.getElementById("File");
+    var file = fileInput.files[0];
     var inputTitle = document.getElementById("Title");
     var inputContent = document.getElementById("Content");
     var user_id = sessionStorage.getItem("activeUser");
 
-    alert(user_id);
-
     if (!title.trim()) {
-      inputTitle.classList.toggle('is-invalid');
+      inputTitle.classList.toggle("is-invalid");
       return;
     } else {
-      inputTitle.classList.remove('is-invalid');
+      inputTitle.classList.remove("is-invalid");
     }
 
     if (!content.trim()) {
-      inputContent.classList.toggle('is-invalid');
+      inputContent.classList.toggle("is-invalid");
       return;
     } else {
-      inputContent.classList.remove('is-invalid');
+      inputContent.classList.remove("is-invalid");
     }
 
     if (!course.trim()) {
       course = "General";
     }
 
-    const { data, error } = await supabase.from("forum").insert({
-      title: title,
-      content: content,
-      course: course,
-      user_id: user_id,
-    });
+    // ganti logic nanti, harusnya cek file kosong atau ngga diatas, baru dalemnya yg beda
+
+    const { data, error } = await supabase
+      .from("forum")
+      .insert({
+        title: title,
+        content: content,
+        course: course,
+        user_id: user_id,
+      })
+      .select("id");
 
     if (error) {
       alert(error.message);
       console.log(error);
+      return;
+    } else if (file) {
+      const filePath = `uploads/forum_${data[0].id}/${file.name}`;
+
+      const { data: fileData, error: fileError } = await supabase.storage
+        .from("forum-files")
+        .upload(filePath, file, {
+          cacheControl: "3600",
+          upsert: false,
+        });
+
+      if (fileError) {
+        alert("File upload failed: " + fileError.message);
+        console.error(fileError);
+        return;
+      }
+
+      console.log("File uploaded successfully:", fileData);
+      window.location.href = "../pages/homepage.html";
     } else {
       window.location.href = "../pages/homepage.html";
     }
   }
 
-  // async function getEmailUsername() {
-  //   var email = sessionStorage.getItem("emailActive");
-
-  //   const { data, error } = await supabase
-  //     .from("users")
-  //     .select("user_id")
-  //     .eq("email", email);
-
-  //   if (error) {
-  //     alert("Failed to load posts.");
-  //     console.error("Error fetching posts:", error.message);
-  //   } else if (data.length > 0) {
-  //     sessionStorage.setItem("activeUser", data[0].user_id);
-  //   } else {
-  //     window.location.href = "../index.html";
-  //   }
-  // }
-
   showForum();
-  // getEmailUsername();
   document.getElementById("submitBtn").addEventListener("click", async () => {
     await insert2();
   });

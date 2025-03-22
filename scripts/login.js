@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Login Error:", error.message);
     } else {
       sessionStorage.setItem("activeUser", data.user.id);
-      alert(`User UID: ${data.user.id}`);
+      // alert(`User UID: ${data.user.id}`);
       window.location.href = "pages/homepage.html";
     }
   }
