@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function showForum() {
     const { data, error } = await supabase
       .from("forum")
-      .select("title, content, users(username),course")
+      .select("title, content, users(username), course, file_path")
       .order("created_at", { ascending: false });
 
     if (error) {
@@ -16,15 +16,28 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    const { data: imgUrl } = await supabase.storage
+      .from("forum-files")
+      .getPublicUrl(data[0].file_path);
+
     const forumContent = document.getElementById("forumList");
     forumContent.innerHTML = "";
 
     data.forEach((post) => {
       const postDiv = document.createElement("div");
+      let imgTag = ""; // Default empty image tag
+
+      if (post.file_path) {
+        const imgUrl = supabase.storage
+          .from("forum-files")
+          .getPublicUrl(post.file_path);
+        imgTag = `<img src="${imgUrl.data.publicUrl}" alt="Uploaded Image" class="img-fluid">`;
+      }
       postDiv.innerHTML = `
       <div class="card-parent w-100 mb-5">
-        <div class="card mb-3 border-2">
-          <div class="card-body">
+      <div class="card mb-3 border-2">
+      <div class="card-body">
+            ${imgTag}
             <h5 class="card-title">${post.title}</h5>
             <p class="card-text">${post.content}
             </p>
@@ -70,24 +83,10 @@ document.addEventListener("DOMContentLoaded", () => {
       course = "General";
     }
 
-    // ganti logic nanti, harusnya cek file kosong atau ngga diatas, baru dalemnya yg beda
-
-    const { data, error } = await supabase
-      .from("forum")
-      .insert({
-        title: title,
-        content: content,
-        course: course,
-        user_id: user_id,
-      })
-      .select("id");
-
-    if (error) {
-      alert(error.message);
-      console.log(error);
-      return;
-    } else if (file) {
-      const filePath = `uploads/forum_${data[0].id}/${file.name}`;
+    if (file) {
+      // ganti directory jadi forum, nanti buat replies jadi reply
+      // reset database
+      const filePath = `uploads/${user_id}/${file.name}`;
 
       const { data: fileData, error: fileError } = await supabase.storage
         .from("forum-files")
@@ -100,17 +99,57 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("File upload failed: " + fileError.message);
         console.error(fileError);
         return;
+      } else {
+        const { data, error } = await supabase.from("forum").insert({
+          title: title,
+          content: content,
+          course: course,
+          user_id: user_id,
+          file_path: filePath,
+        });
+
+        if (error) {
+          alert("Error insert forum: " + error.message);
+          console.log(error);
+          return;
+        }
+
+        // const { data: dataInsertId, error: errorInsertId } = await supabase
+        //   .from("forum")
+        //   .insert({
+        //     file_id: fileData[0].id,
+        //   });
+
+        // if (errorInsertId) {
+        //   alert("Failed to input file id: " + errorInsertId.message);
+        //   console.error(errorInsertId);
+        //   return;
+        // }
       }
 
       console.log("File uploaded successfully:", fileData);
       window.location.href = "../pages/homepage.html";
     } else {
+      const { data, error } = await supabase.from("forum").insert({
+        title: title,
+        content: content,
+        course: course,
+        user_id: user_id,
+      });
+
+      if (error) {
+        alert("Error insert forum: " + error.message);
+        console.log(error);
+        return;
+      }
+
+      console.log("File uploaded successfully:", fileData);
       window.location.href = "../pages/homepage.html";
     }
   }
 
-  showForum();
   document.getElementById("submitBtn").addEventListener("click", async () => {
     await insert2();
   });
+  showForum();
 });
