@@ -10,12 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
     var yearOfCollege = document.getElementById("Year-Of-College").value;
     var region = document.getElementById("Region").value;
     var nim = document.getElementById("NIM").value;
-    var email = sessionStorage.getItem("emailActive");
-    var password = sessionStorage.getItem("passwordActive");
 
     const { data, error } = await supabase.from("users").insert({
-      email: email,
-      password: password,
       username: username,
       nim: nim,
       major: major,
@@ -27,8 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alert(error);
       console.log(error);
     } else {
-      sessionStorage.setItem("usernameActive", username);
-      window.location.href = "../pages/homepage.html";
+      window.location.href = "../index.html";
     }
   }
   document.getElementById("submitBtn").addEventListener("click", userDetails);
