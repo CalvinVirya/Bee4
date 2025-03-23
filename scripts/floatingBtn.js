@@ -83,13 +83,13 @@ fabElement.addEventListener("click", (e) => {
   }
 });
 
-// document.querySelector(".fab-btn img").addEventListener("click", (e) => {
-//   e.preventDefault(); 
+document.querySelector(".fab-btn img").addEventListener("click", (e) => {
+  e.preventDefault(); 
 
-//   // Reset button position
-//   fabElement.style.top = "auto"; 
-//   fabElement.style.left = "auto"; 
-//   fabElement.classList.remove("fab-active"); // Ensure it resets
+  // Reset button position
+  fabElement.style.top = "auto"; 
+  fabElement.style.left = "auto"; 
+  fabElement.classList.remove("fab-active"); // Ensure it resets
 
-//   console.log("Button position reset!"); // Debugging
-// });
+  console.log("Button position reset!"); // Debugging
+});
