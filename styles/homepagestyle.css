@@ -40,6 +40,8 @@
 }
 
 .addIcon{
+  height: 25px;
+  width: 25px;
   display: flex; /* Enables flexbox */
   justify-content: center; /* Centers horizontally */
   align-items: center; /* Centers vertically */
