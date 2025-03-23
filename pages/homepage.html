@@ -24,8 +24,9 @@
 </head>
 
 <body>
-  <!-- head parent -->
-  <div class="head-parent p-4">
+  <div id="main-wrapper">
+    <!-- head parent -->
+    <div class="head-parent p-4">
 
     <!-- parent container -->
     <div class="parent w-100">
@@ -105,10 +106,10 @@
       </div>
 
       <!-- button trigger modal -->
-      <button type="button" class="btn btn-forum mb-3 w-100 fw-bold" data-bs-toggle="modal"
+      <!-- <button type="button" class="btn btn-forum mb-3 w-100 fw-bold" data-bs-toggle="modal"
         data-bs-target="#exampleModal">
         + Add New Forum
-      </button>
+      </button> -->
 
       <!-- modal insert forum -->
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -179,6 +180,15 @@
 
   </div>
   <!-- end head parent -->
+    <div id="floating-snap-btn-wrapper">
+      <div class="fab-btn">
+         <a href="#"><img class="addIcon" src="../assets/plusIcon.png" alt="Add Icon" data-bs-toggle="modal" data-bs-target="#exampleModal"></a>
+      </div>
+    </div>
+  </div>
+  
+  
 </body>
-
+<!-- ini script float btnnya, dia harus dibawah baru bisa -->
+<script src="../scripts/floatingBtn.js"></script>
 </html>
