@@ -40,8 +40,3 @@ input:checked~.btn-nav {
     background: #ABD2FA;
     border-radius: 100px;
 }
-
-.btn-icon {
-    width: 20px;
-    height: 20px;
-}

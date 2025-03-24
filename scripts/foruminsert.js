@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         imgTag = `<img src="${imgUrl.data.publicUrl}" alt="Uploaded Image" class="img-fluid">`;
       }
       postDiv.innerHTML = `
-      <div class="card-parent w-100 mb-3" onClick="sessionStorage.setItem('forumActive', '${post.id}'); window.location.href = '../pages/forumdetail.html';">
+      <div class="card-parent w-100 mb-5" onClick="sessionStorage.setItem('forumActive', '${post.id}'); window.location.href = '../pages/forumdetail.html';">
       <div class="card mb-3 border-2">
       <div class="card-body">
             <div class="img-container text-center">${imgTag}</div>
@@ -80,8 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (file) {
-      // ganti directory jadi forum, nanti buat replies jadi reply
-      // reset database
       const filePath = `forum-images/${user_id}/${file.name}`;
 
       const { data: fileData, error: fileError } = await supabase.storage

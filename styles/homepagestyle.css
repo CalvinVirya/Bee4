@@ -10,8 +10,9 @@
   border: 1px solid #091540;
   border-radius: 100px;
   background-color: transparent;
-  padding: .2rem 1rem;
+  padding: .1rem 1rem;
   font-size: .8rem;
+  color: #091540;
 }
 
 .btn-forum{
@@ -43,7 +44,9 @@
   height: 50px;
 }
 
-
+.card-parent{
+  cursor: pointer;
+}
 
 /* start bagian float button */
 
