@@ -66,12 +66,12 @@
   position: relative;
   width: 100vw;
   height: calc(100vh - 70px);
-  background-color: white;
+  background-color: #ABD2FA;
   overflow-x: hidden;
   #floating-snap-btn-wrapper {
     position: fixed;
     transform: translate(-50%, -50%);
-    bottom: 10vh;
+    bottom: 5rem;
     right: 0px;
     width: 50px;
     height: 50px;
