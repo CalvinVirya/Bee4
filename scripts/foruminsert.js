@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function showForum() {
     const { data, error } = await supabase
       .from("forum")
-      .select("title, content, users(username), course, file_path")
+      .select("title, content, users(username), course, file_path, id")
       .order("created_at", { ascending: false });
 
     if (error) {
@@ -15,10 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Failed to load posts.");
       return;
     }
-
-    const { data: imgUrl } = await supabase.storage
-      .from("forum-files")
-      .getPublicUrl(data[0].file_path);
 
     const forumContent = document.getElementById("forumList");
     forumContent.innerHTML = "";
@@ -34,10 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
         imgTag = `<img src="${imgUrl.data.publicUrl}" alt="Uploaded Image" class="img-fluid">`;
       }
       postDiv.innerHTML = `
-      <div class="card-parent w-100 mb-5">
+      <div class="card-parent w-100 mb-3" onClick="sessionStorage.setItem('forumActive', '${post.id}'); window.location.href = '../pages/forumdetail.html';">
       <div class="card mb-3 border-2">
       <div class="card-body">
-            ${imgTag}
+            <div class="img-container text-center">${imgTag}</div>
             <h5 class="card-title">${post.title}</h5>
             <p class="card-text">${post.content}
             </p>
@@ -46,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="button-card d-flex justify-content-between align-items-center mt-2">
           <h6 class="card-subtitle text-body-secondary">${post.users.username}'s Forum</h6>
           <div class="info-parent">
-            <button class="me-2 card-subtitle text-body-secondary">${post.course}</button>
+            <button>${post.course}</button>
           </div>
         </div>
       </div>
@@ -55,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  async function insert2(event) {
+  async function insert2() {
     var title = document.getElementById("Title").value;
     var content = document.getElementById("Content").value;
     var course = document.getElementById("Course").value;
@@ -66,14 +62,14 @@ document.addEventListener("DOMContentLoaded", () => {
     var user_id = sessionStorage.getItem("activeUser");
 
     if (!title.trim()) {
-      inputTitle.classList.toggle("is-invalid");
+      inputTitle.classList.add("is-invalid");
       return;
     } else {
       inputTitle.classList.remove("is-invalid");
     }
 
     if (!content.trim()) {
-      inputContent.classList.toggle("is-invalid");
+      inputContent.classList.add("is-invalid");
       return;
     } else {
       inputContent.classList.remove("is-invalid");
@@ -86,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (file) {
       // ganti directory jadi forum, nanti buat replies jadi reply
       // reset database
-      const filePath = `uploads/${user_id}/${file.name}`;
+      const filePath = `forum-images/${user_id}/${file.name}`;
 
       const { data: fileData, error: fileError } = await supabase.storage
         .from("forum-files")
@@ -113,18 +109,6 @@ document.addEventListener("DOMContentLoaded", () => {
           console.log(error);
           return;
         }
-
-        // const { data: dataInsertId, error: errorInsertId } = await supabase
-        //   .from("forum")
-        //   .insert({
-        //     file_id: fileData[0].id,
-        //   });
-
-        // if (errorInsertId) {
-        //   alert("Failed to input file id: " + errorInsertId.message);
-        //   console.error(errorInsertId);
-        //   return;
-        // }
       }
 
       console.log("File uploaded successfully:", fileData);
@@ -143,7 +127,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      console.log("File uploaded successfully:", fileData);
       window.location.href = "../pages/homepage.html";
     }
   }

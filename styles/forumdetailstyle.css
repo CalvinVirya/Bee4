@@ -1,0 +1,18 @@
+.info-parent button {
+    border: 1px solid #091540;
+    border-radius: 100px;
+    background-color: transparent;
+    padding: .2rem 1rem;
+    font-size: .8rem;
+}
+
+.bb {
+    border: 2px solid #ededed;
+}
+
+.img-container img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}

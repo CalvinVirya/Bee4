@@ -21,6 +21,7 @@
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="../scripts/foruminsert.js"></script>
+  <script src="../scripts/forumdetail.js"></script>
 </head>
 
 <body>
@@ -28,167 +29,167 @@
     <!-- head parent -->
     <div class="head-parent p-4">
 
-    <!-- parent container -->
-    <div class="parent w-100">
+      <!-- parent container -->
+      <div class="parent w-100">
 
-      <!-- navbar -->
-      <nav
-        class="bottom-navbar-parent d-flex justify-content-center position-fixed bottom-0 start-0 end-0 w-100 bg-white align-items-end z-3">
-        <ul class="nav-list d-flex justify-content-center gap-3 m-0 p-0">
-          <li class="nav-item">
-            <label for="input-1">
-              <input type="radio" id="input-1" name="group" checked class="display-none"
-                onclick="window.location.href='../pages/homepage.html'">
-              <span class="btn-nav">
-                <img src="../assets/home.png" class="btn-icon" alt="Home">
-              </span>
-            </label>
-          </li>
-          <li class="nav-item">
-            <label for="input-2">
-              <input type="radio" id="input-2" name="group" class="display-none"
-                onclick="window.location.href='../pages/searchpage.html'">
-              <span class="btn-nav">
-                <img src="../assets/search.png" class="btn-icon" alt="Search">
-              </span>
-            </label>
-          </li>
-          <li class="nav-item">
-            <label for="input-3">
-              <input type="radio" id="input-3" name="group" class="display-none"
-                onclick="window.location.href='../pages/profilepage.html'">
-              <span class="btn-nav">
-                <img src="../assets/user.png" class="btn-icon" alt="Profile">
-              </span>
-            </label>
-          </li>
-        </ul>
-      </nav>
+        <!-- navbar -->
+        <nav
+          class="bottom-navbar-parent d-flex justify-content-center position-fixed bottom-0 start-0 end-0 w-100 bg-white align-items-end z-3">
+          <ul class="nav-list d-flex justify-content-center gap-3 m-0 p-0">
+            <li class="nav-item">
+              <label for="input-1">
+                <input type="radio" id="input-1" name="group" checked class="display-none"
+                  onclick="window.location.href='../pages/homepage.html'">
+                <span class="btn-nav">
+                  <img src="../assets/home.png" class="btn-icon" alt="Home">
+                </span>
+              </label>
+            </li>
+            <li class="nav-item">
+              <label for="input-2">
+                <input type="radio" id="input-2" name="group" class="display-none"
+                  onclick="window.location.href='../pages/searchpage.html'">
+                <span class="btn-nav">
+                  <img src="../assets/search.png" class="btn-icon" alt="Search">
+                </span>
+              </label>
+            </li>
+            <li class="nav-item">
+              <label for="input-3">
+                <input type="radio" id="input-3" name="group" class="display-none"
+                  onclick="window.location.href='../pages/profilepage.html'">
+                <span class="btn-nav">
+                  <img src="../assets/user.png" class="btn-icon" alt="Profile">
+                </span>
+              </label>
+            </li>
+          </ul>
+        </nav>
 
-      <!-- image carousel -->
-      <div class="carousel mb-3">
-        <div id="demo" class="carousel slide" data-bs-ride="carousel">
-          <!-- Indicators/dots -->
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-            <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-            <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-          </div>
-
-          <!-- The slideshow/carousel -->
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="../assets/img-1.jpg" alt="" class="d-block w-100 c-img" />
-              <div class="position-absolute top-50 start-50 translate-middle text-center fw-bold text-light">
-                <p>Ask, Learn, Share, Build Knowledge Together!</p>
-              </div>
+        <!-- image carousel -->
+        <div class="carousel mb-3">
+          <div id="demo" class="carousel slide" data-bs-ride="carousel">
+            <!-- Indicators/dots -->
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
             </div>
-            <div class="carousel-item c-item">
-              <img src="../assets/img-2.jpg" alt="" class="d-block w-100 c-img" />
-              <div class="position-absolute top-50 start-50 translate-middle text-center fw-bold text-light">
-                <p>Where Questions Find Answers & Ideas Spark Solutions!</p>
+
+            <!-- The slideshow/carousel -->
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="../assets/img-1.jpg" alt="" class="d-block w-100 c-img" />
+                <div class="position-absolute top-50 start-50 translate-middle text-center fw-bold text-light">
+                  <p>Ask, Learn, Share, Build Knowledge Together!</p>
+                </div>
               </div>
-            </div>
-            <div class="carousel-item c-item">
-              <img src="../assets/img-3.jpg" alt="" class="d-block w-100 c-img" />
-              <div class="position-absolute top-50 start-50 translate-middle text-center fw-bold text-light">
-                <p>A Community of Curious Minds Join the Discussion!</p>
+              <div class="carousel-item c-item">
+                <img src="../assets/img-2.jpg" alt="" class="d-block w-100 c-img" />
+                <div class="position-absolute top-50 start-50 translate-middle text-center fw-bold text-light">
+                  <p>Where Questions Find Answers & Ideas Spark Solutions!</p>
+                </div>
+              </div>
+              <div class="carousel-item c-item">
+                <img src="../assets/img-3.jpg" alt="" class="d-block w-100 c-img" />
+                <div class="position-absolute top-50 start-50 translate-middle text-center fw-bold text-light">
+                  <p>A Community of Curious Minds Join the Discussion!</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- category button -->
-      <div class="categories mb-3">
-        <button class="me-2 btn-category-active">For You</button>
-        <button>Latest</button>
-      </div>
+        <!-- category button -->
+        <div class="categories mb-3">
+          <button class="me-2 btn-category-active">For You</button>
+          <button>Latest</button>
+        </div>
 
-      <!-- button trigger modal -->
-      <!-- <button type="button" class="btn btn-forum mb-3 w-100 fw-bold" data-bs-toggle="modal"
-        data-bs-target="#exampleModal">
-        + Add New Forum
-      </button> -->
+        <!-- modal insert forum -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-      <!-- modal insert forum -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-fullscreen-sm-down">
 
-        <div class="modal-dialog modal-fullscreen-sm-down">
+            <div class="modal-content">
 
-          <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Forum</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
 
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Forum</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+              <div class="modal-body">
 
-            <div class="modal-body">
-
-              <!-- title input -->
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Title<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="Title" />
-                <div class="invalid-feedback text-start">
-                  Title cannot be empty.
+                <!-- title input -->
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Title<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="Title" />
+                  <div class="invalid-feedback text-start">
+                    Title cannot be empty.
+                  </div>
                 </div>
-              </div>
 
-              <!-- content input -->
-              <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Content<span
-                    class="text-danger">*</span></label>
-                <textarea class="form-control" id="Content" rows="3"></textarea>
-                <div class="invalid-feedback text-start">
-                  Content cannot be empty.
+                <!-- content input -->
+                <div class="mb-3">
+                  <label for="exampleFormControlTextarea1" class="form-label">Content<span
+                      class="text-danger">*</span></label>
+                  <textarea class="form-control" id="Content" rows="3"></textarea>
+                  <div class="invalid-feedback text-start">
+                    Content cannot be empty.
+                  </div>
                 </div>
+
+                <!-- matkul input -->
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Course</label>
+                  <input type="text" id="Course" class="form-control" />
+                </div>
+
+                <!-- input file -->
+                <div class="mb-2">
+                  <label for="formFile" class="form-label">Attachment</label>
+                  <input class="form-control" type="file" id="File">
+                </div>
+                <div class="form-text" id="basic-addon4">Max file size 5MB.</div>
+
+
               </div>
 
-              <!-- matkul input -->
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Course</label>
-                <input type="text" id="Course" class="form-control" />
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-forum" id="submitBtn">Submit</button>
               </div>
-
-              <!-- input file -->
-              <div class="mb-2">
-                <label for="formFile" class="form-label">Attachment</label>
-                <input class="form-control" type="file" id="File">
-              </div>
-              <div class="form-text" id="basic-addon4">Max file size 5MB.</div>
 
 
             </div>
-
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-forum" id="submitBtn">Submit</button>
-            </div>
-
 
           </div>
 
         </div>
 
-      </div>
+        <!-- card list -->
+        <div id="forumList" class="w-100"></div>
 
-      <!-- card list -->
-      <div id="forumList" class="w-100"></div>
+        <!-- div pembatas navbar -->
+        <div class="navbar-safe-zone"></div>
+
+      </div>
+      <!-- end parent container -->
 
     </div>
-    <!-- end parent container -->
+    <!-- end head parent -->
 
-  </div>
-  <!-- end head parent -->
     <div id="floating-snap-btn-wrapper">
       <div class="fab-btn">
-         <a href="#"><img class="addIcon" src="../assets/plusIcon.png" alt="Add Icon" data-bs-toggle="modal" data-bs-target="#exampleModal"></a>
+        <a href="#"><img class="addIcon" src="../assets/plusIcon.png" alt="Add Icon" data-bs-toggle="modal"
+            data-bs-target="#exampleModal"></a>
       </div>
     </div>
   </div>
-  
-  
+
+
 </body>
 <!-- ini script float btnnya, dia harus dibawah baru bisa -->
 <script src="../scripts/floatingBtn.js"></script>
+
 </html>

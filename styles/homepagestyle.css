@@ -10,7 +10,8 @@
   border: 1px solid #091540;
   border-radius: 100px;
   background-color: transparent;
-  padding: .1rem 1rem;
+  padding: .2rem 1rem;
+  font-size: .8rem;
 }
 
 .btn-forum{
@@ -30,6 +31,19 @@
 .c-img {
   filter: brightness(0.5);
 }
+
+.img-container img{
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.navbar-safe-zone{
+  height: 50px;
+}
+
+
 
 /* start bagian float button */
 

@@ -15,20 +15,26 @@ document.addEventListener("DOMContentLoaded", () => {
     // Validasi email harus domain @binus.ac.id
     const emailRegex = /^[a-zA-Z0-9._%+-]+@binus\.ac\.id$/;
     if (!emailRegex.test(email)) {
-      inputEmail.classList.toggle('is-invalid');
+      inputEmail.classList.add('is-invalid');
       return;
+    } else {
+      inputEmail.classList.remove('is-invalid');
     }
 
     // Cek apakah password mengandung spasi
     if (password.includes(" ")) {
-      inputPassword.classList.toggle('is-invalid');
+      inputPassword.classList.add('is-invalid');
       return;
+    } else {
+      inputPassword.classList.remove('is-invalid');
     }
 
     // Cek apakah kedua password sama
     if (password !== confirmPassword) {
-      inputConfirmPassword.classList.toggle('is-invalid');
+      inputConfirmPassword.classList.add('is-invalid');
       return;
+    } else {
+      inputConfirmPassword.classList.remove('is-invalid');
     }
 
     const { data, error } = await supabase.auth.signUp({

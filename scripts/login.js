@@ -14,14 +14,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // Validasi email harus @binus.ac.id
     const emailRegex = /^[a-zA-Z0-9._%+-]+@binus\.ac\.id$/;
     if (!emailRegex.test(email)) {
-      inputEmail.classList.toggle('is-invalid');
+      inputEmail.classList.add('is-invalid');
       return;
+    } else {
+      inputEmail.classList.remove('is-invalid');
     }
 
     // Cek apakah password mengandung spasi
     if (password.includes(" ")) {
-      inputPassword.classList.toggle('is-invalid');
+      inputPassword.classList.add('is-invalid');
       return;
+    } else {
+      inputPassword.classList.remove('is-invalid');
     }
 
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -34,28 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Login Error:", error.message);
     } else {
       sessionStorage.setItem("activeUser", data.user.id);
-      // alert(`User UID: ${data.user.id}`);
       window.location.href = "pages/homepage.html";
     }
   }
 
-  // async function getUId() {
-  //   const { data, error } = await supabase.auth.getSession();
-
-  //   if (error) {
-  //     console.error("Error getting user:", error.message);
-  //     return;
-  //   } else {
-  //     alert("User UID:", data.user.id);
-  //   }
-
-  //   if (!data || !data.user) {
-  //     console.log("User belum login!");
-  //     return;
-  //   }
-  // }
-
-
   document.getElementById("loginBtn").addEventListener("click", signIn);
-  // document.getElementById("loginBtn").addEventListener("click", getUId);
 });
