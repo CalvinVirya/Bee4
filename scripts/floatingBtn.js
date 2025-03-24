@@ -2,7 +2,7 @@ const fabElement = document.getElementById("floating-snap-btn-wrapper");
 let oldPositionX,
   oldPositionY;
 
-  const move = (e) => {
+const move = (e) => {
     if (!fabElement.classList.contains("fab-active")) {
       const wrapperElement = document.getElementById("main-wrapper");
       const wrapperRect = wrapperElement.getBoundingClientRect();
@@ -99,7 +99,7 @@ fabElement.addEventListener("click", (e) => {
   }
 });
 
-document.querySelector(".fab-btn img").addEventListener("click", (e) => {
+document.querySelector(".fab-btn i").addEventListener("click", (e) => {
   e.preventDefault(); 
 
   // Reset button position
