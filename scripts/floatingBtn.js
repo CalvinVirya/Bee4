@@ -5,11 +5,9 @@ let oldPositionX,
 const move = (e) => {
     if (!fabElement.classList.contains("fab-active")) {
       const wrapperElement = document.getElementById("main-wrapper");
-      const navbarElement = document.querySelector("nav");
       const wrapperRect = wrapperElement.getBoundingClientRect();
-      const navbarHeight = navbarElement ? navbarElement.offsetHeight : 0;
       const buttonSize = 50; // Button width & height
-
+  
       let newX, newY;
       if (e.type === "touchmove") {
         newX = e.touches[0].pageX;
@@ -18,20 +16,19 @@ const move = (e) => {
         newX = e.pageX;
         newY = e.pageY;
       }
-
+  
       // Constrain X position within the main wrapper
       newX = Math.max(wrapperRect.left + buttonSize / 2, 
                        Math.min(newX, wrapperRect.right - buttonSize / 2));
-
-      // Constrain Y position, preventing the button from going under the navbar
-      newY = Math.max(wrapperRect.top + navbarHeight + buttonSize / 2, 
+  
+      // Constrain Y position within the main wrapper
+      newY = Math.max(wrapperRect.top + buttonSize / 2, 
                        Math.min(newY, wrapperRect.bottom - buttonSize / 2));
-
+  
       fabElement.style.left = `${newX}px`;
       fabElement.style.top = `${newY}px`;
     }
-};
-
+  };
 
 const mouseDown = (e) => {
   console.log("mouse down ");
@@ -112,13 +109,3 @@ document.querySelector(".fab-btn i").addEventListener("click", (e) => {
 
   console.log("Button position reset!"); // Debugging
 });
-
-function updateWrapperHeight() {
-  const navbarHeight = document.querySelector("nav").offsetHeight;
-  document.getElementById("main-wrapper").style.height = 
-      `${window.innerHeight - navbarHeight}px`;
-}
-
-// Update on load and resize
-window.addEventListener("load", updateWrapperHeight);
-window.addEventListener("resize", updateWrapperHeight);
