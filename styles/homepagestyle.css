@@ -65,7 +65,7 @@
 #main-wrapper{
   position: relative;
   width: 100vw;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 5rem);
   background-color: #ABD2FA;
   overflow-x: hidden;
   #floating-snap-btn-wrapper {

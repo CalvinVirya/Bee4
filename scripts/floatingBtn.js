@@ -2,17 +2,33 @@ const fabElement = document.getElementById("floating-snap-btn-wrapper");
 let oldPositionX,
   oldPositionY;
 
-const move = (e) => {
-  if (!fabElement.classList.contains("fab-active")) {
-    if (e.type === "touchmove") {
-        fabElement.style.top = e.touches[0].pageY + "px"; // Fix for scrolling
-        fabElement.style.left = e.touches[0].pageX + "px";
+  const move = (e) => {
+    if (!fabElement.classList.contains("fab-active")) {
+      const wrapperElement = document.getElementById("main-wrapper");
+      const wrapperRect = wrapperElement.getBoundingClientRect();
+      const buttonSize = 50; // Button width & height
+  
+      let newX, newY;
+      if (e.type === "touchmove") {
+        newX = e.touches[0].pageX;
+        newY = e.touches[0].pageY;
       } else {
-        fabElement.style.top = e.pageY + "px"; // Fix for scrolling
-        fabElement.style.left = e.pageX + "px";
-      }      
-  }
-};
+        newX = e.pageX;
+        newY = e.pageY;
+      }
+  
+      // Constrain X position within the main wrapper
+      newX = Math.max(wrapperRect.left + buttonSize / 2, 
+                       Math.min(newX, wrapperRect.right - buttonSize / 2));
+  
+      // Constrain Y position within the main wrapper
+      newY = Math.max(wrapperRect.top + buttonSize / 2, 
+                       Math.min(newY, wrapperRect.bottom - buttonSize / 2));
+  
+      fabElement.style.left = `${newX}px`;
+      fabElement.style.top = `${newY}px`;
+    }
+  };
 
 const mouseDown = (e) => {
   console.log("mouse down ");

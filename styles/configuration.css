@@ -17,9 +17,9 @@ body {
 }
 
 .bottom-navbar-parent {
-    height: 80px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+    height: 5rem;
+    /* border-top-right-radius: 10px;
+    border-top-left-radius: 10px; */
     border-top: 1px solid #d9d9d9;
 }
 
