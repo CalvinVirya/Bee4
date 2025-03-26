@@ -1,4 +1,4 @@
-.categories button {
+.categoriesBtn {
   border: 1px solid #091540;
   border-radius: 100px;
   background-color: white;
@@ -6,11 +6,16 @@
   color: #091540;
 }
 
+input:checked~.categoriesBtn {
+  background: #091540;
+  color: white;
+}
+
 .info-parent button {
   border: 1px solid #091540;
   border-radius: 100px;
   background-color: transparent;
-  padding: .1rem 1rem;
+  padding: .3rem 1rem;
   font-size: .8rem;
   color: #091540;
 }

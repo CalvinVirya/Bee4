@@ -164,6 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
         await insertReply();
     });
     showReply();
-    forumDetail()
+    forumDetail();
 
 });

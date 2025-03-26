@@ -17,38 +17,46 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const forumContent = document.getElementById("forumList");
+    const noData = document.getElementById("NoForum");
     forumContent.innerHTML = "";
 
-    data.forEach((post) => {
-      const postDiv = document.createElement("div");
-      let imgTag = ""; // Default empty image tag
+    if (!data || data.length === 0) {
+      noData.style.display = "block";
+    } else {
+      noData.style.display = "none";
 
-      if (post.file_path) {
-        const imgUrl = supabase.storage
-          .from("forum-files")
-          .getPublicUrl(post.file_path);
-        imgTag = `<img src="${imgUrl.data.publicUrl}" alt="Uploaded Image" class="img-fluid">`;
-      }
-      postDiv.innerHTML = `
-      <div class="card-parent w-100 mb-5" onClick="sessionStorage.setItem('forumActive', '${post.id}'); window.location.href = '../pages/forumdetail.html';">
-      <div class="card mb-3 border-2">
-      <div class="card-body">
-            <div class="img-container text-center">${imgTag}</div>
-            <h5 class="card-title">${post.title}</h5>
-            <p class="card-text">${post.content}
-            </p>
+      data.forEach((post) => {
+        const postDiv = document.createElement("div");
+        let imgTag = ""; // Default empty image tag
+
+        if (post.file_path) {
+          const imgUrl = supabase.storage
+            .from("forum-files")
+            .getPublicUrl(post.file_path);
+          imgTag = `<img src="${imgUrl.data.publicUrl}" alt="Uploaded Image" class="img-fluid">`;
+        }
+        postDiv.innerHTML = `
+          <div class="card-parent w-100 mb-5"
+          onClick="sessionStorage.setItem('forumActive', '${post.id}'); window.location.href = '../pages/forumdetail.html';">
+          <div class="card mb-3 border-2">
+            <div class="card-body">
+              <div class="img-container text-center">${imgTag}</div>
+              <h5 class="card-title">${post.title}</h5>
+              <p class="card-text">${post.content}</p>
+            </div>
           </div>
-        </div>
-        <div class="button-card d-flex justify-content-between align-items-center mt-2">
-          <h6 class="card-subtitle text-body-secondary">${post.users.username}'s Forum</h6>
-          <div class="info-parent">
-            <button>${post.course}</button>
+          <div class="button-card d-flex justify-content-between align-items-center mt-2">
+            <h6 class="card-subtitle text-body-secondary">${post.users.username}'s Forum</h6>
+            <div class="info-parent">
+              <button>${post.course}</button>
+            </div>
           </div>
-        </div>
-      </div>
+          </div>
         `;
-      forumContent.appendChild(postDiv);
-    });
+
+        forumContent.appendChild(postDiv);
+      });
+    }
   }
 
   async function insert2() {
@@ -129,8 +137,84 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  async function latestForum() {
+    var userMajor = sessionStorage.getItem("activeMajor");
+    const { data, error } = await supabase
+      .from("forum")
+      .select("title, content, users(username, major), course, file_path, id")
+      .eq("users.major", userMajor)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Error fetching posts:", error.message);
+      alert("Failed to load posts.");
+      return;
+    }
+
+    const forumContent = document.getElementById("forumList");
+    const noData = document.getElementById("NoForum");
+    forumContent.innerHTML = "";
+
+    if (!data || data.length === 0) {
+      noData.style.display = "block";
+    } else {
+      noData.style.display = "none";
+
+      data.forEach((post) => {
+        const postDiv = document.createElement("div");
+        let imgTag = ""; // Default empty image tag
+
+        if (post.file_path) {
+          const imgUrl = supabase.storage
+            .from("forum-files")
+            .getPublicUrl(post.file_path);
+          imgTag = `<img src="${imgUrl.data.publicUrl}" alt="Uploaded Image" class="img-fluid">`;
+        }
+        postDiv.innerHTML = `
+          <div class="card-parent w-100 mb-5"
+          onClick="sessionStorage.setItem('forumActive', '${post.id}'); window.location.href = '../pages/forumdetail.html';">
+          <div class="card mb-3 border-2">
+            <div class="card-body">
+              <div class="img-container text-center">${imgTag}</div>
+              <h5 class="card-title">${post.title}</h5>
+              <p class="card-text">${post.content}</p>
+            </div>
+          </div>
+          <div class="button-card d-flex justify-content-between align-items-center mt-2">
+            <h6 class="card-subtitle text-body-secondary">${post.users.username}'s Forum</h6>
+            <div class="info-parent">
+              <button>${post.course}</button>
+            </div>
+          </div>
+          </div>
+        `;
+
+        forumContent.appendChild(postDiv);
+      });
+    }
+  }
+
+  const forYouCheck = document.getElementById("ForYou");
+  const latestCheck = document.getElementById("Latest");
+
+  if (forYouCheck.checked) {
+    showForum();
+  };
+
+  forYouCheck.addEventListener('change', function () {
+    if (forYouCheck.checked) {
+      showForum();
+    }
+  });
+
+  latestCheck.addEventListener('change', function () {
+    if (latestCheck.checked) {
+      latestForum();
+      // alert(sessionStorage.getItem("activeMajor"));
+    }
+  });
+
   document.getElementById("submitBtn").addEventListener("click", async () => {
     await insert2();
   });
-  showForum();
 });

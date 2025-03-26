@@ -9,6 +9,7 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <link rel="stylesheet" href="../styles/homepagestyle.css" />
   <link rel="stylesheet" href="../styles/configuration.css" />
+  <link rel="shortcut icon" href="../assets/logo.png" type="image/x-icon">
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -67,7 +68,7 @@
         </nav>
 
         <!-- image carousel -->
-        <div class="carousel mb-3">
+        <div class="carousel mb-4">
           <div id="demo" class="carousel slide" data-bs-ride="carousel">
             <!-- Indicators/dots -->
             <div class="carousel-indicators">
@@ -101,9 +102,16 @@
         </div>
 
         <!-- category button -->
-        <div class="categories mb-3">
-          <button class="me-2 btn-category-active">For You</button>
-          <button>Latest</button>
+        <div class="categories mb-4">
+          <label for="ForYou" class="me-2">
+            <input type="radio" name="categories" id="ForYou" checked class="display-none">
+            <span class="categoriesBtn">For You</span>
+          </label>
+
+          <label for="Latest">
+            <input type="radio" name="categories" id="Latest" class="display-none">
+            <span class="categoriesBtn">Latest</span>
+          </label>
         </div>
 
         <!-- modal insert forum -->
@@ -165,6 +173,11 @@
 
           </div>
 
+        </div>
+
+        <!-- kalo forumnya belom ada -->
+        <div id="NoForum">
+          <p class="position-absolute top-50 start-50 translate-middle">No Forum yet</p>
         </div>
 
         <!-- card list -->
