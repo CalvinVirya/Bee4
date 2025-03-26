@@ -2,7 +2,7 @@
     border: 1px solid #091540;
     border-radius: 100px;
     background-color: transparent;
-    padding: .1rem 1rem;
+    padding: .3rem 1rem;
     font-size: .8rem;
     color: #091540;
 }
@@ -19,8 +19,32 @@
 }
 
 .profile-container img{
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+}
+
+.profile-reply-container img {
     width: 40px;
     height: 40px;
-    background-color: red;
     border-radius: 100px;
+}
+
+.reply-group{
+    border: 1px solid #091540;
+    border-radius: 5px;
+}
+
+.input-group-text{
+    border: none;
+    background-color: white;
+}
+
+.form-control{
+    border: none;
+    border-right: 1px solid #091540;
+}
+
+#ReplyFile{
+    display: none;
 }

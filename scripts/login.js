@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Login Error:", error.message);
     } else {
       sessionStorage.setItem("activeUser", data.user.id);
+      sessionStorage.setItem("activeEmail", data.user.email);
       await getMajor();
       window.location.href = "pages/homepage.html";
     }

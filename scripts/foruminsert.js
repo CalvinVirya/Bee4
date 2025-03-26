@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5aXZrYXRsdml1d2l0d2prbGtxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIzMTYxMDMsImV4cCI6MjA1Nzg5MjEwM30.nLQ_vGBgSGWqDMz1LF1vSWAeydpxItyT_ZDvwwc9IQQ";
   const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
+  const noData = document.getElementById("NoForum");
+  const noDataLast = document.getElementById("NoForumLastest");
+
   async function showForum() {
     const { data, error } = await supabase
       .from("forum")
@@ -17,11 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const forumContent = document.getElementById("forumList");
-    const noData = document.getElementById("NoForum");
     forumContent.innerHTML = "";
 
     if (!data || data.length === 0) {
       noData.style.display = "block";
+      noDataLast.style.display = "none";
+      return;
     } else {
       noData.style.display = "none";
 
@@ -128,8 +132,9 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (error) {
-        alert("Error insert forum: " + error.message);
+        alert("You must Login First");
         console.log(error);
+        window.location.href = "../index.html";
         return;
       }
 
@@ -152,13 +157,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const forumContent = document.getElementById("forumList");
-    const noData = document.getElementById("NoForum");
     forumContent.innerHTML = "";
 
     if (!data || data.length === 0) {
-      noData.style.display = "block";
-    } else {
+      noDataLast.style.display = "block";
       noData.style.display = "none";
+      return;
+    } else {
+      noDataLast.style.display = "none";
 
       data.forEach((post) => {
         const postDiv = document.createElement("div");

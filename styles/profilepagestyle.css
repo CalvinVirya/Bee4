@@ -1,0 +1,23 @@
+.info-parent{
+    background-color: #D6F5FF;
+}
+
+.btn-profile{
+    background-color: #091540;
+    color: white;
+}
+
+.nim-info {
+    border: 1px solid #091540;
+    border-radius: 100px;
+    background-color: transparent;
+    padding: .3rem 1rem;
+    font-size: .8rem;
+    color: #091540;
+}
+
+.profile-image img{
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+}

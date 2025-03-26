@@ -9,22 +9,24 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <link rel="stylesheet" href="../styles/configuration.css">
     <link rel="shortcut icon" href="../assets/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/profilepagestyle.css">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="https://kit.fontawesome.com/8713e699af.js" crossorigin="anonymous"></script>
+    <script src="../scripts/profilepage.js"></script>
 
 </head>
 
 <body>
 
     <!-- head parent -->
-    <div class="head-parent p-4">
+    <div class="head-parent">
 
         <!-- parent container -->
-        <div class="parent text-center w-100">
+        <div class="parent w-100">
 
             <!-- navbar -->
             <nav
@@ -60,7 +62,12 @@
                 </ul>
             </nav>
 
-            <p>profile page</p>
+            <div id="profileBody"></div>
+
+            <!-- button signout -->
+            <div class="p-4">
+                <button type="button" class="btn btn-outline-danger w-100" id="SignoutBtn">Sign Out</button>
+            </div>
 
         </div>
         <!-- end parent container -->

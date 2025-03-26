@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const { data, error } = await supabase
             .from("forum")
             .select("title, content, course, file_path, users(username, major)")
-            .eq("id", sessionStorage.getItem("forumActive"));
+            .eq("id", sessionStorage.getItem("forumActive"))
+            .single();
 
         if (error) {
             console.error("Error fetching posts:", error.message);
@@ -22,10 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const postDiv = document.createElement("div");
         let imgTag = "";
 
-        if (data[0].file_path) {
+        if (data.file_path) {
             const imgUrl = supabase.storage
                 .from("forum-files")
-                .getPublicUrl(data[0].file_path);
+                .getPublicUrl(data.file_path);
             imgTag = `<img src="${imgUrl.data.publicUrl}" alt="Uploaded Image" class="img-fluid">`;
         }
 
@@ -42,19 +43,19 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="p-4">
                 <div class="d-flex align-items-center mb-4">
                     <div class="profile-container">
-                    <img src="../assets/pp4.jpg" alt="Uploaded Image" class="img-fluid">
+                        <img src="../assets/pp4.jpg" alt="Uploaded Image" class="img-fluid">
                     </div>
                     <div class="ms-3">
-                        <p class="fs-5 mb-1">${data[0].users.username}</p>
-                        <div class="form-text">${data[0].users.major}</div>
+                        <p class="fs-5 m-0">${data.users.username}</p>
+                        <div class="form-text">${data.users.major}</div>
                     </div>
                 </div>
                 <div class="img-container text-center">${imgTag}</div>
-                <h5 class="card-title mb-2">${data[0].title}</h5>
-                <p class="card-text">${data[0].content}</p>
+                <h5 class="card-title mb-2">${data.title}</h5>
+                <p class="card-text">${data.content}</p>
 
                 <div class="info-parent">
-                    <button>${data[0].course}</button>
+                    <button>${data.course}</button>
                 </div>
             </div>
             <div class="border-bottom bb"></div>
@@ -146,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
             postDiv.innerHTML = `
                 <div class="card border-2 mb-4">
                     <div class="card-body">
-                        <div class="profile-container d-flex align-items-center mb-3">
+                        <div class="profile-reply-container d-flex align-items-center mb-3">
                             <img src="../assets/pp4.jpg" alt="Uploaded Image" class="img-fluid">
                             <p class="ms-3 mt-3">${post.users.username}</p>
                         </div>
@@ -159,6 +160,19 @@ document.addEventListener("DOMContentLoaded", () => {
             forumReply.appendChild(postDiv);
         });
     }
+
+    const reply = document.getElementById("ReplyFile");
+
+    reply.addEventListener('change', function(){
+        const file = this.files[0];
+        const fileName = document.getElementById("FileName");
+
+        if(file){
+            fileName.textContent = `File: ${file.name}`;
+        } else{
+            fileName.textContent = `File: No file chosen`;
+        }
+    });
 
     document.getElementById("replyBtn").addEventListener("click", async () => {
         await insertReply();

@@ -29,35 +29,26 @@
         <div class="parent w-100">
 
             <div id="forumBody"></div>
-            <!-- <div class="card border-2 mb-4">
-                <div class="card-body">
-                    <div class="profile-container d-flex align-items-center mb-3">
-                        <img src="../assets/pp4.jpg" alt="Uploaded Image" class="img-fluid">
-                        <p class="ms-3 mt-3">${post.users.username}</p>
-                    </div>
-                    <div class="img-container text-center">${imgTag}</div>
-                    <p class="card-text">${post.content}
-                    </p>
-                </div>
-            </div> -->
 
             <div class="p-4">
-                <p class="font-weight-light">Forum Reply</p>
+                <p class="font-weight-light mb-3">Forum Reply</p>
+
+                <div class="reply-group">
+                    <div class="input-group">
+                        <span class="input-group-text" onclick="document.getElementById('ReplyFile').click();"><i class="fa-solid fa-paperclip fa-lg"
+                                style="color: #091540;"></i></span>
+                        <input type="text" class="form-control" placeholder="Add Reply..." id="ReplyText">
+                        <span class="input-group-text" id="replyBtn"><i class="fa-solid fa-paper-plane fa-lg"
+                                style="color: #091540;"></i></span>
+                    </div>
+                </div>
+                <div class="mt-2 mb-4" id="FileName">File: No file chosen</div>
+
+                <input type="file" id="ReplyFile">
 
                 <div id="forumComment"></div>
             </div>
 
-            <div class="p-4">
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Add Reply</label>
-                    <input type="text" class="form-control" id="ReplyText" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">File Input</label>
-                    <input class="form-control" type="file" id="ReplyFile">
-                </div>
-                <button type="submit" class="btn btn-primary" id="replyBtn">Submit</button>
-            </div>
         </div>
 
     </div>
