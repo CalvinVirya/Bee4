@@ -12,10 +12,6 @@ body {
     margin: auto;
 }
 
-.display-none {
-    display: none;
-}
-
 .bottom-navbar-parent {
     height: 5rem;
     border-top: 1px solid #d9d9d9;

@@ -31,19 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         postDiv.innerHTML = `
-            <div class="d-flex d-flex justify-content-between align-items-center p-4">
-                <i class="fa-solid fa-arrow-left fa-lg" style="color: #091540;"
-                    onclick="window.history.back()"></i>
-                <span class="fs-5">Forum details</span>
-                <div></div>
-            </div>
-
-            <div class="border-bottom bb"></div>
-
             <div class="p-4">
                 <div class="d-flex align-items-center mb-4">
                     <div class="profile-container">
-                        <img src="../assets/pp4.jpg" alt="Uploaded Image" class="img-fluid">
+                        <img src="../assets/profile.png" alt="Uploaded Image" class="img-fluid">
                     </div>
                     <div class="ms-3">
                         <p class="fs-5 m-0">${data.users.username}</p>
@@ -58,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     <button>${data.course}</button>
                 </div>
             </div>
-            <div class="border-bottom bb"></div>
         `;
         forumBody.appendChild(postDiv);
     }

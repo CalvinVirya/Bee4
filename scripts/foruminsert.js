@@ -152,12 +152,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .eq("users.major", userMajor)
       .order("created_at", { ascending: false });
 
-    // alert(data[0].title);
-    // console.log(data[0].title);
-    // console.log(data[0].content);
-    // console.log(data[0].course);
-    // console.log(data[0].id);
-
     if (error) {
       console.error("Error fetching posts:", error.message);
       alert("Failed to load posts.");

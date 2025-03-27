@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const { data, error } = await supabase
             .from("users")
-            .select("username, major, nim, year_of_college, region")
+            .select("username, major, nim, year_of_college, region, file_path")
             .eq("id", user_id)
             .single();
 
@@ -35,13 +35,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 .from("forum-files")
                 .getPublicUrl(data.file_path);
             imgTag = `<img src="${imgUrl.data.publicUrl}" alt="Uploaded Image" class="img-fluid">`;
+        } else{
+            imgTag = `<img src="../assets/profile.png" alt="Uploaded Image" class="img-fluid">`;
         }
 
         postDiv.innerHTML = `
             <!-- profile -->
-            <div class="text-center p-4">
+            <div class="text-center mb-3">
                 <div class="profile-image mb-3">
-                    <img src="../assets/pp4.jpg" alt="">
+                    ${imgTag}
                 </div>
                 <p class="p-0 m-0 fs-2 fw-bold">${data.username}</p>
                 <p class="p-0 m-0 mb-2 fs-5">${usr_email}</p>
@@ -49,8 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <!-- profile button grup -->
-            <div class="w-100 text-center mb-3">
-                <button type="button" class="btn me-3 btn-profile fw-semibold">Edit Profile</button>
+            <div class="w-100 text-center mb-4">
+                <button type="button" class="btn me-3 btn-profile fw-semibold" onclick="window.location.href='../pages/editprofilepage.html'">Edit Profile</button>
                 <button type="button" class="btn btn-profile fw-semibold">About Us</button>
             </div>
 
@@ -85,6 +87,96 @@ document.addEventListener("DOMContentLoaded", () => {
         profileBody.appendChild(postDiv);
     }
 
+    async function showProfileForum() {
+        const { data, error } = await supabase
+            .from("forum")
+            .select("title, content, users!inner(username, id), course, file_path, id")
+            .eq("users.id", sessionStorage.getItem("activeUser"))
+            .order("created_at", { ascending: false });
+
+        if (error) {
+            console.error("Error fetching posts:", error.message);
+            alert("Failed to load posts.");
+            return;
+        }
+
+        const profileForum = document.getElementById("profileForum");
+        profileForum.innerHTML = "";
+
+        if (!data || data.length === 0) {
+            document.getElementById("profileNoData").style.display = "block";
+            return;
+        } else {
+            document.getElementById("profileNoData").style.display = "none";
+            data.forEach((post) => {
+                const postDiv = document.createElement("div");
+                let imgTag = ""; // Default empty image tag
+
+                if (post.file_path) {
+                    const imgUrl = supabase.storage
+                        .from("forum-files")
+                        .getPublicUrl(post.file_path);
+                    imgTag = `<img src="${imgUrl.data.publicUrl}" alt="Uploaded Image" class="img-fluid">`;
+                }
+                postDiv.innerHTML = `
+                    <div class="card-parent w-100 mb-5">
+                    <div class="card mb-3 border-2">
+                        <div class="card-body" onClick="sessionStorage.setItem('forumActive', '${post.id}'); window.location.href = '../pages/forumdetail.html';">
+                        <div class="img-container text-center">${imgTag}</div>
+                        <h5 class="card-title mt-3">${post.title}</h5>
+                        <p class="card-text">${post.content}</p>
+                        </div>
+                    </div>
+                    <div class="button-card mt-2">
+                            <div class="d-flex justify-content-between">
+                            <h6 class="card-subtitle text-body-secondary">${post.users.username}'s Forum</h6>
+                            <span data-bs-toggle="modal" data-bs-target="#exampleModal" onClick="sessionStorage.setItem('deleteActive', '${post.id}'); sessionStorage.setItem('pathActive', '${post.file_path}');"><i class="fa-solid fa-trash fa-lg"
+                                    style="color: #091540;"></i></span>
+                            </div>
+                            <div class="course-info mt-2">
+                                <button>${post.course}</button>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+
+                profileForum.appendChild(postDiv);
+            });
+        }
+    }
+
+    async function deleteForum() {
+        const { data, error } = await supabase
+            .from("forum")
+            .delete()
+            .eq("id", sessionStorage.getItem("deleteActive"));
+
+        if (error) {
+            console.error("Error deleting forum:", error.message);
+            alert("Failed to delete forum.");
+        }
+
+        if (!sessionStorage.getItem('pathActive')) {
+            window.location.href = '../pages/profilepage.html';
+            return;
+        } else {
+            const { data: fileData, error: fileError } = await supabase
+                .storage
+                .from("forum-files")
+                .remove([sessionStorage.getItem('pathActive')]);
+
+            if(fileError){
+                console.error(fileError.message);
+            } else{
+                console.log('berhasil');
+            }
+        }
+
+        window.location.href = '../pages/profilepage.html';
+    }
+
     document.getElementById("SignoutBtn").addEventListener("click", signOut);
-    showProfile()
+    document.getElementById("deleteBtn").addEventListener("click", deleteForum);
+    showProfile();
+    showProfileForum();
 });
