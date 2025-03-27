@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         postDiv.innerHTML = `
             <div class="d-flex d-flex justify-content-between align-items-center p-4">
                 <i class="fa-solid fa-arrow-left fa-lg" style="color: #091540;"
-                    onclick="window.location.href='../pages/homepage.html'"></i>
+                    onclick="window.history.back()"></i>
                 <span class="fs-5">Forum details</span>
                 <div></div>
             </div>

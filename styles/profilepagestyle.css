@@ -1,8 +1,8 @@
-.info-parent{
+.info-parent {
     background-color: #D6F5FF;
 }
 
-.btn-profile{
+.btn-profile {
     background-color: #091540;
     color: white;
 }
@@ -16,8 +16,12 @@
     color: #091540;
 }
 
-.profile-image img{
+.profile-image img {
     width: 150px;
     height: 150px;
     border-radius: 100px;
+}
+
+.spacing {
+    height: 70px;
 }

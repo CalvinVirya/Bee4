@@ -1,0 +1,36 @@
+.tag-btn {
+    border: 1px solid #091540;
+    border-radius: 100px;
+    background-color: white;
+    padding: .3rem 1rem;
+    color: #091540;
+    margin: 8px 5px;
+}
+
+.selected-tag-btn {
+    border: 1px solid #091540;
+    border-radius: 100px;
+    background-color: white;
+    padding: .3rem 1rem;
+    color: #091540;
+    margin: 8px 5px;
+}
+
+.search-bar {
+    border: 1px solid #091540;
+    border-radius: 5px;
+}
+
+.form-control {
+    border: none;
+    border-right: 1px solid #091540;
+}
+
+.info-parent button {
+    border: 1px solid #091540;
+    border-radius: 100px;
+    background-color: transparent;
+    padding: .3rem 1rem;
+    font-size: .8rem;
+    color: #091540;
+}
