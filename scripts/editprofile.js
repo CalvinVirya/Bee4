@@ -39,6 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
         var username = document.getElementById("usernameText").value;
         var user_id = sessionStorage.getItem('activeUser');
 
+        if (username.length > 10 || username === "") {
+            username.classList.add('is-invalid');
+            return;
+        }
+
         const { data, error } = await supabase
             .from("users")
             .update({
