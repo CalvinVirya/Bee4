@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <!-- profile button grup -->
             <div class="w-100 text-center mb-4">
                 <button type="button" class="btn me-3 btn-profile fw-semibold" onclick="window.location.href='../pages/editprofilepage.html'">Edit Profile</button>
-                <button type="button" class="btn btn-profile fw-semibold">About Us</button>
+                <button type="button" class="btn btn-profile fw-semibold" onclick="window.location.href='../pages/aboutus.html'">About Us</button>
             </div>
 
             <!-- profile info -->
