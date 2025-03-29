@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const tagResult = document.getElementById("tag-result");
 
   async function showForumSearch() {
+    // alert("kepanggil kok");
     var searchText = document.getElementById("searchText").value;
 
     document.getElementById("tag-parent").style.display = "none";
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const { data, error } = await supabase
       .from("forum")
       .select("title, content, users(username), course, file_path, id")
-      .eq("course", searchText)
+      .or(`course.ilike.%${searchText}%,title.ilike.%${searchText}%`)
       .order("created_at", { ascending: false });
 
     if (error) {
@@ -162,6 +163,4 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("searchBtn")
     .addEventListener("click", showForumSearch);
-
-  // bikin querynya
 });
