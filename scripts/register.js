@@ -1,3 +1,5 @@
+// done checked
+
 document.addEventListener("DOMContentLoaded", () => {
   const supabaseUrl = "https://eyivkatlviuwitwjklkq.supabase.co";
   const supabaseKey =

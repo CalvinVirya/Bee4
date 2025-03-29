@@ -41,6 +41,12 @@
             <div class="ps-4 pe-4">
                 <div id="updateBody" class="mt-3 mb-3"></div>
 
+                <!-- warning unsave -->
+                <div class="alert alert-warning d-none" role="alert" id="unsaveAlert">
+                    <i class="fa-solid fa-triangle-exclamation text-warning"></i>
+                    You have unsaved change.
+                </div>
+
                 <div class="form-group mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Username</label>
                     <input type="text" class="form-control border-2" id="usernameText" value="">
@@ -82,6 +88,8 @@
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
+
+            <div class="spacing" style="height: 100px;"></div>
 
         </div>
         <!-- end parent container -->

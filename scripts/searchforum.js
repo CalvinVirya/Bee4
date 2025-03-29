@@ -1,3 +1,5 @@
+// done checked
+
 document.addEventListener("DOMContentLoaded", () => {
   const supabaseUrl = "https://eyivkatlviuwitwjklkq.supabase.co";
   const supabaseKey =
@@ -10,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const tagResult = document.getElementById("tag-result");
 
   async function showForumSearch() {
-    // alert("kepanggil kok");
     var searchText = document.getElementById("searchText").value;
 
     document.getElementById("tag-parent").style.display = "none";
@@ -41,10 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!data || data.length === 0) {
       noData.style.display = "block";
-      //   noDataLast.style.display = "none";
       return;
     } else {
-      //   noData.style.display = "none";
 
       data.forEach((post) => {
         const postDiv = document.createElement("div");
@@ -61,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
           onClick="sessionStorage.setItem('forumActive', '${post.id}'); window.location.href = '../pages/forumdetail.html';">
           <div class="card mb-3 border-2">
             <div class="card-body">
-              <div class="img-container text-center">${imgTag}</div>
+              <div class="img-container text-center mb-3">${imgTag}</div>
               <h5 class="card-title">${post.title}</h5>
               <p class="card-text">${post.content}</p>
             </div>
@@ -117,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
           onClick="sessionStorage.setItem('forumActive', '${post.id}'); window.location.href = '../pages/forumdetail.html';">
           <div class="card mb-3 border-2">
             <div class="card-body">
-              <div class="img-container text-center">${imgTag}</div>
+              <div class="img-container text-center mb-3">${imgTag}</div>
               <h5 class="card-title">${post.title}</h5>
               <p class="card-text">${post.content}</p>
             </div>

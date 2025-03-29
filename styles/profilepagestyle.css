@@ -1,3 +1,5 @@
+/* done checked */
+
 .info-parent {
     background-color: #D6F5FF;
 }
@@ -30,10 +32,6 @@
     height: 150px;
     border-radius: 100px;
     object-fit: cover;
-}
-
-.spacing {
-    height: 150px;
 }
 
 .categoriesBtn {

@@ -145,6 +145,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    document.getElementById('usernameText').addEventListener("change", function(){
+        document.getElementById('unsaveAlert').classList.remove('d-none');
+    });
+
+    document.getElementById('profileFile').addEventListener("change", function () {
+        document.getElementById('unsaveAlert').classList.remove('d-none');
+    });
+
     showProfilePicture();
     fetchUserData();
     document.getElementById("saveBtn").addEventListener("click", updateProfile);

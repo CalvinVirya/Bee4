@@ -1,3 +1,5 @@
+// done checked
+
 const fabElement = document.getElementById("floating-snap-btn-wrapper");
 let oldPositionX,
   oldPositionY;
