@@ -34,3 +34,16 @@ input:checked~.btn-nav {
     background: #ABD2FA;
     border-radius: 100px;
 }
+
+.text-primary-color {
+    color: #091540;
+}
+
+.outline-primary {
+    border: 1px solid #091540;
+    border-radius: 100px;
+    background-color: white;
+    padding: .3rem 1rem;
+    font-size: .8rem;
+    color: #091540;
+}

@@ -33,7 +33,7 @@
                 <span class="fs-5">Forum details</span>
                 <div></div>
             </div>
-            
+
             <div class="border-bottom bb"></div>
 
             <div id="forumBody"></div>
@@ -45,8 +45,8 @@
 
                 <div class="reply-group">
                     <div class="input-group">
-                        <span class="input-group-text" onclick="document.getElementById('ReplyFile').click();"><i class="fa-solid fa-paperclip fa-lg"
-                                style="color: #091540;"></i></span>
+                        <span class="input-group-text" onclick="document.getElementById('ReplyFile').click();"><i
+                                class="fa-solid fa-paperclip fa-lg" style="color: #091540;"></i></span>
                         <input type="text" class="form-control" placeholder="Add Reply..." id="ReplyText">
                         <span class="input-group-text" id="replyBtn"><i class="fa-solid fa-paper-plane fa-lg"
                                 style="color: #091540;"></i></span>
@@ -59,10 +59,14 @@
                 <div id="forumComment"></div>
             </div>
 
-        </div>
+            <div class="position-absolute top-50 start-50 translate-middle" id="loading-animation">
+                <div class="spinner-border" style="color: #091540;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
 
-    </div>
-    <!-- end parent container -->
+        </div>
+        <!-- end parent container -->
 
     </div>
     <!-- end head parent -->

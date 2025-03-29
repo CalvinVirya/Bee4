@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function forumDetail() {
         const { data, error } = await supabase
             .from("forum")
-            .select("title, content, course, file_path, users(username, major)")
+            .select("title, content, course, file_path, users(username, major, file_path)")
             .eq("id", sessionStorage.getItem("forumActive"))
             .single();
 
@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const postDiv = document.createElement("div");
         let imgTag = "";
+        let profileTag = "";
 
         if (data.file_path) {
             const imgUrl = supabase.storage
@@ -30,11 +31,20 @@ document.addEventListener("DOMContentLoaded", () => {
             imgTag = `<img src="${imgUrl.data.publicUrl}" alt="Uploaded Image" class="img-fluid">`;
         }
 
+        if(data.users.file_path){
+            const imgUrl = supabase.storage
+            .from("forum-files")
+            .getPublicUrl(data.users.file_path);
+            profileTag = `<img src="${imgUrl.data.publicUrl}" alt="Uploaded Image" class="img-fluid">`
+        } else{
+            profileTag = `<img src="../assets/profile.png" alt="Uploaded Image" class="img-fluid">`;
+        }
+
         postDiv.innerHTML = `
-            <div class="p-4">
+            <div class="ps-4 pe-4 pb-4 pt-4">
                 <div class="d-flex align-items-center mb-4">
                     <div class="profile-container">
-                        <img src="../assets/profile.png" alt="Uploaded Image" class="img-fluid">
+                        ${profileTag}
                     </div>
                     <div class="ms-3">
                         <p class="fs-5 m-0">${data.users.username}</p>
@@ -44,13 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="img-container text-center">${imgTag}</div>
                 <h5 class="card-title mb-2">${data.title}</h5>
                 <p class="card-text">${data.content}</p>
-
-                <div class="info-parent">
-                    <button>${data.course}</button>
-                </div>
+                <button class="outline-primary">${data.course}</button>
             </div>
         `;
         forumBody.appendChild(postDiv);
+        document.getElementById('loading-animation').classList.add('d-none');
     }
 
     async function insertReply() {
@@ -110,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
         var forumId = sessionStorage.getItem("forumActive");
         const { data, error } = await supabase
             .from("forumReply")
-            .select("content, users(username), file_path, forum(id)")
+            .select("content, users(username, file_path), file_path, forum(id)")
             .eq("forum_id", forumId)
             .order("created_at", { ascending: false });
 
@@ -126,6 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
         data.forEach((post) => {
             const postDiv = document.createElement("div");
             let imgTag = "";
+            let profileTag = "";
 
             if (post.file_path) {
                 const imgUrl = supabase.storage
@@ -134,11 +143,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 imgTag = `<img src="${imgUrl.data.publicUrl}" alt="Uploaded Image" class="img-fluid">`;
             }
 
+            if(post.users.file_path){
+                const imgUrl = supabase.storage
+                .from("forum-files")
+                .getPublicUrl(post.users.file_path);
+                profileTag = `<img src="${imgUrl.data.publicUrl}" alt="Uploaded Image" class="img-fluid">`;
+            } else{
+                profileTag = `<img src="../assets/profile.png" alt="Uploaded Image" class="img-fluid">`;
+            }
+
             postDiv.innerHTML = `
                 <div class="card border-2 mb-4">
                     <div class="card-body">
                         <div class="profile-reply-container d-flex align-items-center mb-3">
-                            <img src="../assets/pp4.jpg" alt="Uploaded Image" class="img-fluid">
+                            ${profileTag}
                             <p class="ms-3 mt-3">${post.users.username}</p>
                         </div>
                         <div class="img-container text-center">${imgTag}</div>

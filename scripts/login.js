@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (error) {
-      loginAlert.classList.toggle('display-none');
+      loginAlert.classList.toggle('d-none');
       console.error("Login Error:", error.message);
     } else {
       sessionStorage.setItem("activeUser", data.user.id);

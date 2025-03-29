@@ -35,3 +35,16 @@
 .spacing {
     height: 150px;
 }
+
+.categoriesBtn {
+    border: 1px solid #091540;
+    border-radius: 100px;
+    background-color: white;
+    padding: .3rem 1rem;
+    color: #091540;
+}
+
+input:checked~.categoriesBtn {
+    background: #091540;
+    color: white;
+}

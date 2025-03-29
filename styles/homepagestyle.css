@@ -11,15 +11,6 @@ input:checked~.categoriesBtn {
   color: white;
 }
 
-.info-parent button {
-  border: 1px solid #091540;
-  border-radius: 100px;
-  background-color: transparent;
-  padding: .3rem 1rem;
-  font-size: .8rem;
-  color: #091540;
-}
-
 .btn-forum{
   background-color: #091540;
   color: white;

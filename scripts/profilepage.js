@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .from("forum-files")
                 .getPublicUrl(data.file_path);
             imgTag = `<img src="${imgUrl.data.publicUrl}" alt="Uploaded Image" class="img-fluid">`;
-        } else{
+        } else {
             imgTag = `<img src="../assets/profile.png" alt="Uploaded Image" class="img-fluid">`;
         }
 
@@ -62,21 +62,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="d-flex align-items-center mt-3">
                         <i class="fa-solid fa-book fa-2xl me-3" style="color: #091540;"></i>
                         <div>
-                            <p class="fw-bold p-0 m-0">Major</p>
+                            <p class="fw-bold p-0 m-0 text-primary-color">Major</p>
                             <p class="p-0 m-0">${data.major}</p>
                         </div>
                     </div>
                     <div class="d-flex align-items-center mt-3">
                         <i class="fa-solid fa-calendar fa-2xl me-3" style="color: #091540;"></i>
                         <div>
-                            <p class="fw-bold p-0 m-0">Year of College</p>
+                            <p class="fw-bold p-0 m-0 text-primary-color">Year of College</p>
                             <p class="p-0 m-0">${data.year_of_college}</p>
                         </div>
                     </div>
                     <div class="d-flex align-items-center mt-3 mb-3">
                         <i class="fa-solid fa-location-dot fa-2xl me-3" style="color: #091540;"></i>
                         <div>
-                            <p class="fw-bold p-0 m-0">Region</p>
+                            <p class="fw-bold p-0 m-0 text-primary-color">Region</p>
                             <p class="p-0 m-0">${data.region}</p>
                         </div>
                     </div>
@@ -85,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
         profileBody.appendChild(postDiv);
+        document.getElementById('loading-animation').classList.add('d-none');
     }
 
     async function showProfileForum() {
@@ -145,6 +146,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    async function showReplyForum() {
+        
+    }
+
     async function deleteForum() {
         const { data, error } = await supabase
             .from("forum")
@@ -165,9 +170,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 .from("forum-files")
                 .remove([sessionStorage.getItem('pathActive')]);
 
-            if(fileError){
+            if (fileError) {
                 console.error(fileError.message);
-            } else{
+            } else {
                 console.log('berhasil');
             }
         }
@@ -175,8 +180,26 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = '../pages/profilepage.html';
     }
 
+    const YourForumCheck = document.getElementById("YourForum");
+    const YourRepliesCheck = document.getElementById("YourReplies");
+
+    if (YourForumCheck.checked) {
+        showProfileForum();
+    }
+
+    YourForumCheck.addEventListener("change", function () {
+        if (YourForumCheck.checked) {
+            showProfileForum();
+        }
+    });
+
+    YourRepliesCheck.addEventListener("change", function () {
+        if (YourRepliesCheck.checked) {
+            showReplyForum();
+        }
+    });
+
     document.getElementById("SignoutBtn").addEventListener("click", signOut);
     document.getElementById("deleteBtn").addEventListener("click", deleteForum);
     showProfile();
-    showProfileForum();
 });

@@ -22,15 +22,44 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert("Error upload picture: " + error.message);
                 console.log(error);
                 return;
-            } else{
-                const {data , error} = await supabase
-                .from("users")
-                .update({
-                    file_path: filePath,
-                })
-                .eq("id", user_id);
+            } else {
+                await deleteOldProfile();
+
+                const { data, error } = await supabase
+                    .from("users")
+                    .update({
+                        file_path: filePath,
+                    })
+                    .eq("id", user_id);
             }
         } else {
+            return;
+        }
+    }
+
+    async function deleteOldProfile() {
+        const { data, error } = await supabase
+            .from("users")
+            .select("id, file_path")
+            .eq("id", sessionStorage.getItem('activeUser'))
+            .single();
+
+        if(error){
+            console.error('Error deleting old profile:', error);
+        }
+
+        if(data.file_path){
+            const {data: fileData, error: fileError} = await supabase
+            .storage
+            .from("forum-files")
+            .remove([data.file_path]);
+
+            if(fileError){
+                console.error(fileError.message);
+            } else{
+                console.log("berhasil");
+            }
+        } else{
             return;
         }
     }
@@ -38,26 +67,28 @@ document.addEventListener("DOMContentLoaded", () => {
     async function updateProfile() {
         var username = document.getElementById("usernameText").value;
         var user_id = sessionStorage.getItem('activeUser');
+        var usernameInput = document.getElementById("usernameText");
 
         if (username.length > 10 || username === "") {
-            username.classList.add('is-invalid');
+            usernameInput.classList.add('is-invalid');
             return;
+        } else {
+            document.getElementById('loading-animation').classList.remove('d-none');
+            const { data, error } = await supabase
+                .from("users")
+                .update({
+                    username: username,
+                })
+                .eq("id", user_id);
+
+            if (error) {
+                alert("Error update profile: " + error.message);
+                console.log(error);
+                return;
+            }
+
+            await uploadProfile();
         }
-
-        const { data, error } = await supabase
-            .from("users")
-            .update({
-                username: username,
-            })
-            .eq("id", user_id);
-
-        if (error) {
-            alert("Error update profile: " + error.message);
-            console.log(error);
-            return;
-        }
-
-        await uploadProfile();
 
         window.location.href = "../pages/profilepage.html"
     }
@@ -87,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .from("forum-files")
                 .getPublicUrl(data.file_path);
             imgTag = `<img src="${imgUrl.data.publicUrl}" alt="Uploaded Image" class="img-fluid">`;
-        } else{
+        } else {
             imgTag = `<img src="../assets/profile.png" alt="Uploaded Image" class="img-fluid">`;
         }
 
@@ -96,6 +127,25 @@ document.addEventListener("DOMContentLoaded", () => {
         updateBody.appendChild(postDiv);
     }
 
+    async function fetchUserData() {
+        const { data, error } = await supabase
+            .from("users")
+            .select("id, username, major, nim, year_of_college, region, file_path")
+            .eq("id", sessionStorage.getItem('activeUser'))
+            .single();
+
+        if (error) {
+            console.error('Error fetch user:', error);
+        } else {
+            document.getElementById('usernameText').value = data.username;
+            document.getElementById('userMajor').value = data.major;
+            document.getElementById('userNim').value = data.nim;
+            document.getElementById('userYearOfCollege').value = data.year_of_college;
+            document.getElementById('userRegion').value = data.region;
+        }
+    }
+
     showProfilePicture();
+    fetchUserData();
     document.getElementById("saveBtn").addEventListener("click", updateProfile);
 });

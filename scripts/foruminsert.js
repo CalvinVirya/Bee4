@@ -51,14 +51,13 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="button-card d-flex justify-content-between align-items-center mt-2">
             <h6 class="card-subtitle text-body-secondary">${post.users.username}'s Forum</h6>
-            <div class="info-parent">
-              <button>${post.course}</button>
-            </div>
+              <button class="outline-primary">${post.course}</button>
           </div>
           </div>
         `;
 
         forumContent.appendChild(postDiv);
+        document.getElementById('loading-animation').classList.add('d-none');
       });
     }
   }
@@ -190,9 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="button-card d-flex justify-content-between align-items-center mt-2">
             <h6 class="card-subtitle text-body-secondary">${post.users.username}'s Forum</h6>
-            <div class="info-parent">
-              <button>${post.course}</button>
-            </div>
+            <button class="outline-primary">${post.course}</button>
           </div>
           </div>
         `;
