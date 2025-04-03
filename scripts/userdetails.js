@@ -19,67 +19,107 @@ document.addEventListener("DOMContentLoaded", () => {
     var inputNIM = document.getElementById("NIM");
 
     if (!username.trim()) {
-      inputUsername.classList.add('is-invalid');
+      inputUsername.classList.add("is-invalid");
       return;
     } else {
-      inputUsername.classList.remove('is-invalid');
+      inputUsername.classList.remove("is-invalid");
     }
 
     if (username.length > 10) {
-      inputUsername.classList.add('is-invalid');
+      inputUsername.classList.add("is-invalid");
       return;
     } else {
-      inputUsername.classList.remove('is-invalid');
+      inputUsername.classList.remove("is-invalid");
     }
 
     if (username.includes(" ")) {
-      inputUsername.classList.add('is-invalid');
+      inputUsername.classList.add("is-invalid");
       return;
     } else {
-      inputUsername.classList.remove('is-invalid');
+      inputUsername.classList.remove("is-invalid");
     }
 
     if (nim.length !== 10) {
-      inputNIM.classList.add('is-invalid');
+      inputNIM.classList.add("is-invalid");
       return;
     } else {
-      inputNIM.classList.remove('is-invalid');
+      inputNIM.classList.remove("is-invalid");
     }
 
     if (major === "") {
-      inputMajor.classList.add('is-invalid');
+      inputMajor.classList.add("is-invalid");
       return;
     } else {
-      inputMajor.classList.remove('is-invalid');
+      inputMajor.classList.remove("is-invalid");
     }
 
     if (yearOfCollege.length !== 4) {
-      inputYearOfCollege.classList.add('is-invalid');
+      inputYearOfCollege.classList.add("is-invalid");
       return;
     } else {
-      inputYearOfCollege.classList.remove('is-invalid');
+      inputYearOfCollege.classList.remove("is-invalid");
     }
 
     if (region === "") {
-      inputRegion.classList.add('is-invalid');
+      inputRegion.classList.add("is-invalid");
       return;
     } else {
-      inputRegion.classList.remove('is-invalid');
+      inputRegion.classList.remove("is-invalid");
     }
 
-    const { data, error } = await supabase.from("users").insert({
-      username: username,
-      nim: nim,
-      major: major,
-      year_of_college: yearOfCollege,
-      region: region,
+    // const { data, error } = await supabase.from("users").insert({
+    //   username: username,
+    //   nim: nim,
+    //   major: major,
+    //   year_of_college: yearOfCollege,
+    //   region: region,
+    // });
+
+    // if (error) {
+    //   alert(error);
+    //   console.log(error);
+    // } else {
+    //   var email = sessionStorage.getItem("registerEmail");
+    //   var password = sessionStorage.getItem("registerPassword");
+    //   const { data, error } = await supabase.auth.signUp({
+    //     email,
+    //     password,
+    //   });
+
+    //   if (error) {
+    //     alert("Something went wrong");
+    //     window.location.href = "../index.html";
+    //   } else {
+    //     sessionStorage.clear();
+    //     window.location.href = "../index.html";
+    //   }
+    // }
+
+    var email = sessionStorage.getItem("registerEmail");
+    var password = sessionStorage.getItem("registerPassword");
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
     });
 
     if (error) {
-      alert(error);
-      console.log(error);
-    } else {
+      alert("Something went wrong");
       window.location.href = "../index.html";
+    } else {
+      sessionStorage.clear();
+      const { dataLogin, errorLogin } = await supabase.from("users").insert({
+        username: username,
+        nim: nim,
+        major: major,
+        year_of_college: yearOfCollege,
+        region: region,
+      });
+      if (errorLogin) {
+        alert("Something went wrong");
+        window.location.href = "../index.html";
+      } else {
+        window.location.href = "../index.html";
+      }
     }
   }
   document.getElementById("submitBtn").addEventListener("click", userDetails);

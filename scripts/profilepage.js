@@ -26,7 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (error) {
       console.error("Error fetching post:", error.message);
-      alert("Failed to load post.");
+      if (user_id == null) {
+        alert("Please Login Before Accessing This Feature");
+        window.location.href = "../index.html";
+      } else {
+        window.location.href = "../pages/profilepage.html";
+      }
       return;
     }
 
@@ -75,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="d-flex align-items-center mt-3">
                         <i class="fa-solid fa-calendar fa-2xl me-3" style="color: #091540;"></i>
                         <div>
-                            <p class="fw-bold p-0 m-0 text-primary-color">Year of College</p>
+                            <p class="fw-bold p-0 m-0 text-primary-color">Graduate Year</p>
                             <p class="p-0 m-0">${data.year_of_college}</p>
                         </div>
                     </div>
@@ -105,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (error) {
       console.error("Error fetching posts:", error.message);
-      alert("Failed to load posts.");
+      window.location.href = "../pages/profilepage.html";
       return;
     }
 
@@ -165,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (error) {
       console.error("Error fetching posts:", error.message);
-      alert("Failed to load posts.");
+      window.location.href = "../pages/profilepage.html";
       return;
     }
 

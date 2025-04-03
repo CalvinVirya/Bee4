@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (error) {
       console.error("Error fetching posts:", error.message);
-      alert("Failed to load posts.");
+      window.location.href = "../pages/homepage.html";
       return;
     }
 
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
 
         forumContent.appendChild(postDiv);
-        document.getElementById('loading-animation').classList.add('d-none');
+        document.getElementById("loading-animation").classList.add("d-none");
       });
     }
   }
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (error) {
       console.error("Error fetching posts:", error.message);
-      alert("Failed to load posts.");
+      window.location.href = "../pages/homepage.html";
       return;
     }
 

@@ -17,41 +17,43 @@ document.addEventListener("DOMContentLoaded", () => {
     // Validasi email harus domain @binus.ac.id
     const emailRegex = /^[a-zA-Z0-9._%+-]+@binus\.ac\.id$/;
     if (!emailRegex.test(email)) {
-      inputEmail.classList.add('is-invalid');
+      inputEmail.classList.add("is-invalid");
       return;
     } else {
-      inputEmail.classList.remove('is-invalid');
+      inputEmail.classList.remove("is-invalid");
     }
 
     // Cek apakah password mengandung spasi
     if (password.includes(" ")) {
-      inputPassword.classList.add('is-invalid');
+      inputPassword.classList.add("is-invalid");
       return;
     } else {
-      inputPassword.classList.remove('is-invalid');
+      inputPassword.classList.remove("is-invalid");
     }
 
     // Cek apakah kedua password sama
     if (password !== confirmPassword) {
-      inputConfirmPassword.classList.add('is-invalid');
+      inputConfirmPassword.classList.add("is-invalid");
       return;
     } else {
-      inputConfirmPassword.classList.remove('is-invalid');
+      inputConfirmPassword.classList.remove("is-invalid");
     }
 
-    const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
     });
 
     if (error) {
-      alert(error);
-      console.error("Login Error:", error.message);
+      sessionStorage.setItem("registerEmail", email);
+      sessionStorage.setItem("registerPassword", password);
+      window.location.href = "../pages/inputdetail.html";
       return;
     } else {
-      sessionStorage.setItem("emailActive", email);
-      sessionStorage.setItem("passwordActive", password);
-      window.location.href = "../pages/inputdetail.html";
+      // sessionStorage.setItem("emailActive", email);
+      // sessionStorage.setItem("passwordActive", password);
+      alert("Email Already Registered, Please Login");
+      window.location.href = "../index.html";
     }
   }
 
