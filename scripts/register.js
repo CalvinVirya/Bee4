@@ -39,6 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
       inputConfirmPassword.classList.remove("is-invalid");
     }
 
+    if (password.length < 6) {
+      inputPassword.classList.add("is-invalid");
+      return;
+    } else {
+      inputPassword.classList.remove("is-invalid");
+    }
+
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
